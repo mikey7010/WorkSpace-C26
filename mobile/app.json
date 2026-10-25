@@ -35,6 +35,12 @@
           }
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "3ac8d488-9f0f-4f5e-91ee-b0e078678397"
+      }
+    },
+    "owner": "greatsupports"
   }
 }

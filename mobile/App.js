@@ -25,6 +25,8 @@ import {
   loadSavedServerUrl,
   testServerConnection,
   DEFAULT_SERVER_URL,
+  CLOUD_SERVER_URL,
+  LOCAL_DEV_URL,
 } from './src/api/config';
 import { io } from 'socket.io-client';
 
@@ -55,14 +57,17 @@ export default function App() {
     });
   }, []);
 
-  // Connect to Socket.io for Realtime events on mobile
+  // Connect to Socket.io for Realtime events on mobile (with cloud websocket & polling fallback)
   useEffect(() => {
     let socket;
     try {
       socket = io(getServerUrl(), {
-        transports: ['websocket'],
-        timeout: 5000,
-        reconnectionAttempts: 5,
+        transports: ['websocket', 'polling'],
+        timeout: 10000,
+        reconnection: true,
+        reconnectionAttempts: Infinity,
+        reconnectionDelay: 1000,
+        reconnectionDelayMax: 5000,
       });
 
       socket.on('connect', () => setOnline(true));
@@ -236,6 +241,18 @@ function ServerConfigModal({ visible, initialUrl, onClose, onSaved }) {
     setTestState({ status: 'idle', message: '', latency: null });
   }
 
+  function handleSetCloud() {
+    if (CLOUD_SERVER_URL) {
+      setUrlInput(CLOUD_SERVER_URL);
+      setTestState({ status: 'idle', message: '', latency: null });
+    }
+  }
+
+  function handleSetLocal() {
+    setUrlInput(LOCAL_DEV_URL);
+    setTestState({ status: 'idle', message: '', latency: null });
+  }
+
   return (
     <Modal visible={visible} transparent animationType="fade">
       <KeyboardAvoidingView
@@ -269,16 +286,24 @@ function ServerConfigModal({ visible, initialUrl, onClose, onSaved }) {
               autoCapitalize="none"
               autoCorrect={false}
               keyboardType="url"
-              placeholder="http://192.168.31.177:4000"
+              placeholder={DEFAULT_SERVER_URL}
               placeholderTextColor="#64748b"
             />
           </View>
 
-          {/* Quick Preset Button */}
-          <TouchableOpacity onPress={handleResetDefault} style={styles.presetBtn}>
-            <AppIcon name="wifi-outline" size={14} color="#818cf8" />
-            <Text style={styles.presetBtnText}>Reset to Active Wi-Fi ({DEFAULT_SERVER_URL})</Text>
-          </TouchableOpacity>
+          {/* Preset Buttons for Cloud and Local Development */}
+          <View style={{ gap: 4, marginTop: 8 }}>
+            {CLOUD_SERVER_URL ? (
+              <TouchableOpacity onPress={handleSetCloud} style={styles.presetBtn}>
+                <AppIcon name="cloud-outline" size={14} color="#34d399" />
+                <Text style={[styles.presetBtnText, { color: '#34d399' }]}>Set to Cloud Production ({CLOUD_SERVER_URL})</Text>
+              </TouchableOpacity>
+            ) : null}
+            <TouchableOpacity onPress={handleSetLocal} style={styles.presetBtn}>
+              <AppIcon name="wifi-outline" size={14} color="#818cf8" />
+              <Text style={styles.presetBtnText}>Set to Local Wi-Fi ({LOCAL_DEV_URL})</Text>
+            </TouchableOpacity>
+          </View>
 
           {/* Test Connection Button */}
           <TouchableOpacity

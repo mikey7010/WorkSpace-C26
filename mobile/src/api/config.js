@@ -1,6 +1,9 @@
 // Mobile API Configuration
-// Single source of truth for backend connection on Android and Expo
-export const DEFAULT_SERVER_URL = 'http://192.168.31.177:4000';
+// Supports production cloud HTTPS URL via Expo public environment variables,
+// with graceful fallback to LAN IP for local WiFi development.
+export const CLOUD_SERVER_URL = process.env.EXPO_PUBLIC_API_URL || process.env.EXPO_PUBLIC_SERVER_URL || null;
+export const LOCAL_DEV_URL    = 'http://192.168.31.177:4000';
+export const DEFAULT_SERVER_URL = CLOUD_SERVER_URL || LOCAL_DEV_URL;
 const STORAGE_KEY = '@workspace_c26_server_url';
 
 let AsyncStorage = null;
