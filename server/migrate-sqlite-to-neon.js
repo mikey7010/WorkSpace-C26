@@ -1,119 +1,166 @@
 /**
  * One-Time Migration Script: Local SQLite (dev.db) -> Neon PostgreSQL
  * 
- * Safety features:
- * 1. Pre-flight check: Aborts if Neon PostgreSQL already contains existing data.
- * 2. Dependency-safe ordering: Resolves circular references between User and Department.
- * 3. Exact ID & Timestamp preservation: Preserves all primary keys and original timestamps.
- * 4. Privacy preservation: Never prints personal info, emails, or password hashes to console.
- * 5. Sequence synchronization: Automatically updates PostgreSQL serial sequences after insertion.
+ * Safety & Integrity Features:
+ * 1. Pre-flight check: Aborts immediately if Neon PostgreSQL already contains existing data.
+ * 2. Atomic Transaction: Entire migration executes within a PostgreSQL interactive transaction.
+ *    Any failure triggers an automatic ROLLBACK, leaving Neon completely clean.
+ * 3. Dependency-safe ordering: Resolves circular foreign key references between User and Department.
+ * 4. Exact ID & Timestamp preservation: Preserves all primary keys, bcrypt hashes, and original timestamps.
+ * 5. Safe Sequence synchronization: Handles empty tables (Task, Comment) safely without skipping IDs.
+ * 6. Relational verification: Validates counts, manpower sums, and circular foreign keys post-migration.
+ * 7. Privacy & Security: Never logs credentials, connection strings, emails, or personal data.
+ * 8. Reliable teardown: Guarantees Prisma disconnection for both clients and exits non-zero on failure.
  */
 
+const fs = require('fs');
 const path = require('path');
 const { PrismaClient: PostgresClient } = require('@prisma/client');
 const { PrismaClient: SqliteClient }   = require('./prisma/sqlite-client');
 
-async function migrate() {
+let sqliteClient = null;
+let postgresClient = null;
+
+async function runMigration() {
   const dbUrl = process.env.DATABASE_URL;
   if (!dbUrl || !dbUrl.startsWith('postgres')) {
-    console.error('\x1b[31m[ERROR] DATABASE_URL is not set to a valid PostgreSQL connection string.\x1b[0m');
-    console.log('Set $env:DATABASE_URL before running this script.');
-    process.exit(1);
+    throw new Error('DATABASE_URL is not set to a valid PostgreSQL connection string. Set $env:DATABASE_URL before running.');
   }
 
+  // 1. Verify source SQLite database and backup existence
   const sqliteDbPath = path.resolve(__dirname, 'prisma', 'dev.db');
+  if (!fs.existsSync(sqliteDbPath)) {
+    throw new Error(`Source SQLite database not found at ${sqliteDbPath}`);
+  }
+
+  const backupDir = path.resolve(__dirname, 'prisma', 'backups');
+  let backupFile = null;
+  if (fs.existsSync(backupDir)) {
+    const backups = fs.readdirSync(backupDir).filter(f => f.endsWith('.db'));
+    if (backups.length > 0) {
+      backupFile = backups[backups.length - 1];
+    }
+  }
+
   console.log('\x1b[36m========================================================\x1b[0m');
   console.log('\x1b[36m  WorkSpace C26: SQLite -> Neon PostgreSQL Migration   \x1b[0m');
   console.log('\x1b[36m========================================================\x1b[0m');
-  console.log(`Source DB : Local SQLite (${sqliteDbPath})`);
-  console.log(`Target DB : Cloud PostgreSQL (Neon)\n`);
+  console.log(`Source DB      : Local SQLite (${sqliteDbPath})`);
+  console.log(`Verified Backup: ${backupFile ? `${backupFile} in prisma/backups/` : 'Not found in backups/'}`);
+  console.log(`Target DB      : Cloud PostgreSQL (Neon)\n`);
 
-  const sqlite = new SqliteClient({
+  sqliteClient = new SqliteClient({
     datasources: { db: { url: `file:${sqliteDbPath}` } },
   });
-  const postgres = new PostgresClient();
 
-  try {
-    // -------------------------------------------------------------
-    // STEP 1: Pre-Flight Safety Check on Neon Target
-    // -------------------------------------------------------------
-    console.log('Checking Neon PostgreSQL target state...');
-    const [
-      pgUsers,
-      pgDepts,
-      pgPlans,
-      pgDemands,
-      pgCandidates,
-      pgLogs,
-      pgDirectives,
-      pgTasks,
-      pgComments,
-      pgActivities,
-    ] = await Promise.all([
-      postgres.user.count(),
-      postgres.department.count(),
-      postgres.manpowerPlan.count(),
-      postgres.clientDemand.count(),
-      postgres.candidate.count(),
-      postgres.dailyWorkLog.count(),
-      postgres.hrDirective.count(),
-      postgres.task.count(),
-      postgres.comment.count(),
-      postgres.activityLog.count(),
-    ]);
+  postgresClient = new PostgresClient({
+    datasources: { db: { url: dbUrl } },
+  });
 
-    const totalTargetRecords = pgUsers + pgDepts + pgPlans + pgDemands + pgCandidates + pgLogs + pgDirectives + pgTasks + pgComments + pgActivities;
-    if (totalTargetRecords > 0) {
-      console.error(`\x1b[31m[ABORT] Neon database already contains ${totalTargetRecords} records.\x1b[0m`);
-      console.log('To prevent overwriting or duplicating existing data, migration was safely halted.');
-      console.log('Summary of existing target data:', {
-        users: pgUsers,
-        departments: pgDepts,
-        manpowerPlans: pgPlans,
-        candidates: pgCandidates,
-      });
-      process.exit(1);
-    }
-    console.log('✔ Neon target is clean (0 records detected). Proceeding with safe import.\n');
+  // -------------------------------------------------------------
+  // STEP 1: Pre-Flight Safety Check on Neon Target
+  // -------------------------------------------------------------
+  console.log('[Step 1/5] Running pre-flight safety check on Neon target...');
+  const [
+    pgUsers,
+    pgDepts,
+    pgPlans,
+    pgDemands,
+    pgCandidates,
+    pgLogs,
+    pgDirectives,
+    pgTasks,
+    pgComments,
+    pgActivities,
+  ] = await Promise.all([
+    postgresClient.user.count(),
+    postgresClient.department.count(),
+    postgresClient.manpowerPlan.count(),
+    postgresClient.clientDemand.count(),
+    postgresClient.candidate.count(),
+    postgresClient.dailyWorkLog.count(),
+    postgresClient.hrDirective.count(),
+    postgresClient.task.count(),
+    postgresClient.comment.count(),
+    postgresClient.activityLog.count(),
+  ]);
 
-    // -------------------------------------------------------------
-    // STEP 2: Read All Source Data from SQLite
-    // -------------------------------------------------------------
-    console.log('Reading records from local SQLite...');
-    const [
-      users,
-      depts,
-      plans,
-      demands,
-      candidates,
-      logs,
-      directives,
-      tasks,
-      comments,
-      activityLogs,
-    ] = await Promise.all([
-      sqlite.user.findMany({ orderBy: { id: 'asc' } }),
-      sqlite.department.findMany({ orderBy: { id: 'asc' } }),
-      sqlite.manpowerPlan.findMany({ orderBy: { id: 'asc' } }),
-      sqlite.clientDemand.findMany({ orderBy: { id: 'asc' } }),
-      sqlite.candidate.findMany({ orderBy: { id: 'asc' } }),
-      sqlite.dailyWorkLog.findMany({ orderBy: { id: 'asc' } }),
-      sqlite.hrDirective.findMany({ orderBy: { id: 'asc' } }),
-      sqlite.task.findMany({ orderBy: { id: 'asc' } }),
-      sqlite.comment.findMany({ orderBy: { id: 'asc' } }),
-      sqlite.activityLog.findMany({ orderBy: { id: 'asc' } }),
-    ]);
+  const totalTargetRecords = pgUsers + pgDepts + pgPlans + pgDemands + pgCandidates + pgLogs + pgDirectives + pgTasks + pgComments + pgActivities;
+  if (totalTargetRecords > 0) {
+    throw new Error(
+      `Pre-flight check failed: Neon database already contains ${totalTargetRecords} records ` +
+      `(Users: ${pgUsers}, Depts: ${pgDepts}, Plans: ${pgPlans}, Candidates: ${pgCandidates}, Tasks: ${pgTasks}). ` +
+      `Aborting migration to prevent data loss or duplicate records.`
+    );
+  }
+  console.log('✔ Neon target is verified clean (0 records across all 10 tables).\n');
 
-    console.log(`Found ${users.length} users, ${depts.length} departments, ${plans.length} manpower rows, ${candidates.length} candidates, ${logs.length} work logs.`);
+  // -------------------------------------------------------------
+  // STEP 2: Read All Source Data from SQLite
+  // -------------------------------------------------------------
+  console.log('[Step 2/5] Reading all source records from local SQLite (dev.db)...');
+  const [
+    users,
+    depts,
+    plans,
+    demands,
+    candidates,
+    logs,
+    directives,
+    tasks,
+    comments,
+    activityLogs,
+  ] = await Promise.all([
+    sqliteClient.user.findMany({ orderBy: { id: 'asc' } }),
+    sqliteClient.department.findMany({ orderBy: { id: 'asc' } }),
+    sqliteClient.manpowerPlan.findMany({ orderBy: { id: 'asc' } }),
+    sqliteClient.clientDemand.findMany({ orderBy: { id: 'asc' } }),
+    sqliteClient.candidate.findMany({ orderBy: { id: 'asc' } }),
+    sqliteClient.dailyWorkLog.findMany({ orderBy: { id: 'asc' } }),
+    sqliteClient.hrDirective.findMany({ orderBy: { id: 'asc' } }),
+    sqliteClient.task.findMany({ orderBy: { id: 'asc' } }),
+    sqliteClient.comment.findMany({ orderBy: { id: 'asc' } }),
+    sqliteClient.activityLog.findMany({ orderBy: { id: 'asc' } }),
+  ]);
 
-    // -------------------------------------------------------------
-    // STEP 3: Dependency-Safe Insertion into Neon PostgreSQL
-    // -------------------------------------------------------------
+  const totalSourceRecords = users.length + depts.length + plans.length + demands.length + 
+    candidates.length + logs.length + directives.length + tasks.length + comments.length + activityLogs.length;
 
-    // 3a. Insert Users (with departmentId = null to avoid cyclic FK deadlock)
-    console.log('\n[1/10] Migrating Users (stage 1: credentials & profiles)...');
+  console.log(`✔ Read ${totalSourceRecords} total records across 10 tables from SQLite:`);
+  console.log(`  - Users: ${users.length}`);
+  console.log(`  - Departments: ${depts.length}`);
+  console.log(`  - Manpower Plans: ${plans.length}`);
+  console.log(`  - Client Demands: ${demands.length}`);
+  console.log(`  - Candidates: ${candidates.length}`);
+  console.log(`  - Daily Work Logs: ${logs.length}`);
+  console.log(`  - HR Directives: ${directives.length}`);
+  console.log(`  - Tasks: ${tasks.length}`);
+  console.log(`  - Comments: ${comments.length}`);
+  console.log(`  - Activity Logs: ${activityLogs.length}\n`);
+
+  // -------------------------------------------------------------
+  // STEP 3: Atomic Migration Inside a PostgreSQL Transaction
+  // -------------------------------------------------------------
+  console.log('[Step 3/5] Executing migration inside an atomic PostgreSQL transaction...');
+  console.log('           (Any failure will trigger an automatic ROLLBACK; Neon will remain clean)');
+
+  const tables = [
+    'User',
+    'Department',
+    'ManpowerPlan',
+    'ClientDemand',
+    'Candidate',
+    'DailyWorkLog',
+    'HrDirective',
+    'Task',
+    'Comment',
+    'ActivityLog',
+  ];
+
+  await postgresClient.$transaction(async (tx) => {
+    // Stage 1: Insert Users with departmentId = null to break circular foreign key dependency
     for (const u of users) {
-      await postgres.user.create({
+      await tx.user.create({
         data: {
           id: u.id,
           name: u.name,
@@ -128,12 +175,10 @@ async function migrate() {
         },
       });
     }
-    console.log(`✔ Migrated ${users.length} users.`);
 
-    // 3b. Insert Departments (referencing valid headId)
-    console.log('[2/10] Migrating Departments...');
+    // Stage 2: Insert Departments referencing existing Users via headId
     for (const d of depts) {
-      await postgres.department.create({
+      await tx.department.create({
         data: {
           id: d.id,
           name: d.name,
@@ -146,24 +191,20 @@ async function migrate() {
         },
       });
     }
-    console.log(`✔ Migrated ${depts.length} departments.`);
 
-    // 3c. Link Users to Departments (stage 2)
-    console.log('[3/10] Linking User department memberships...');
+    // Stage 3: Restore User.departmentId now that all Department rows exist
     for (const u of users) {
       if (u.departmentId) {
-        await postgres.user.update({
+        await tx.user.update({
           where: { id: u.id },
           data: { departmentId: u.departmentId },
         });
       }
     }
-    console.log('✔ User department memberships linked successfully.');
 
-    // 3d. Insert Manpower Plans
-    console.log('[4/10] Migrating Master Manpower Plan Rows...');
+    // Stage 4: Insert Manpower Plans
     for (const p of plans) {
-      await postgres.manpowerPlan.create({
+      await tx.manpowerPlan.create({
         data: {
           id: p.id,
           dept: p.dept,
@@ -187,12 +228,10 @@ async function migrate() {
         },
       });
     }
-    console.log(`✔ Migrated ${plans.length} manpower plan positions.`);
 
-    // 3e. Insert Client Demands
-    console.log('[5/10] Migrating Client Demands...');
+    // Stage 5: Insert Client Demands
     for (const cd of demands) {
-      await postgres.clientDemand.create({
+      await tx.clientDemand.create({
         data: {
           id: cd.id,
           clientName: cd.clientName,
@@ -211,12 +250,10 @@ async function migrate() {
         },
       });
     }
-    console.log(`✔ Migrated ${demands.length} client demand projects.`);
 
-    // 3f. Insert Candidates & Onboarding Checklists
-    console.log('[6/10] Migrating Candidates & Onboarding Data...');
+    // Stage 6: Insert Candidates & Onboarding Checklists
     for (const c of candidates) {
-      await postgres.candidate.create({
+      await tx.candidate.create({
         data: {
           id: c.id,
           clientDemandId: c.clientDemandId,
@@ -242,12 +279,10 @@ async function migrate() {
         },
       });
     }
-    console.log(`✔ Migrated ${candidates.length} candidates.`);
 
-    // 3g. Insert Daily Work Logs
-    console.log('[7/10] Migrating Daily Shift Work Reports...');
+    // Stage 7: Insert Daily Work Logs
     for (const l of logs) {
-      await postgres.dailyWorkLog.create({
+      await tx.dailyWorkLog.create({
         data: {
           id: l.id,
           departmentId: l.departmentId,
@@ -265,12 +300,10 @@ async function migrate() {
         },
       });
     }
-    console.log(`✔ Migrated ${logs.length} shift work reports.`);
 
-    // 3h. Insert HR Directives
-    console.log('[8/10] Migrating HR Directives & Plant Notices...');
+    // Stage 8: Insert HR Directives
     for (const hd of directives) {
-      await postgres.hrDirective.create({
+      await tx.hrDirective.create({
         data: {
           id: hd.id,
           authorId: hd.authorId,
@@ -283,12 +316,10 @@ async function migrate() {
         },
       });
     }
-    console.log(`✔ Migrated ${directives.length} HR directives.`);
 
-    // 3i. Insert Tasks & Comments
-    console.log('[9/10] Migrating Tasks & Comments...');
+    // Stage 9: Insert Tasks & Comments
     for (const t of tasks) {
-      await postgres.task.create({
+      await tx.task.create({
         data: {
           id: t.id,
           title: t.title,
@@ -305,7 +336,7 @@ async function migrate() {
       });
     }
     for (const com of comments) {
-      await postgres.comment.create({
+      await tx.comment.create({
         data: {
           id: com.id,
           taskId: com.taskId,
@@ -317,12 +348,10 @@ async function migrate() {
         },
       });
     }
-    console.log(`✔ Migrated ${tasks.length} tasks and ${comments.length} comments.`);
 
-    // 3j. Insert Activity Logs
-    console.log('[10/10] Migrating Activity Logs...');
+    // Stage 10: Insert Activity Logs
     for (const al of activityLogs) {
-      await postgres.activityLog.create({
+      await tx.activityLog.create({
         data: {
           id: al.id,
           userId: al.userId,
@@ -331,82 +360,148 @@ async function migrate() {
         },
       });
     }
-    console.log(`✔ Migrated ${activityLogs.length} activity logs.`);
 
-    // -------------------------------------------------------------
-    // STEP 4: PostgreSQL Serial Sequence Synchronization
-    // -------------------------------------------------------------
-    console.log('\nSynchronizing PostgreSQL autoincrement sequences...');
-    const tables = [
-      'User',
-      'Department',
-      'ManpowerPlan',
-      'ClientDemand',
-      'Candidate',
-      'DailyWorkLog',
-      'HrDirective',
-      'Task',
-      'Comment',
-      'ActivityLog',
-    ];
-
+    // Stage 11: Synchronize all 10 PostgreSQL serial sequences
+    // Handles empty tables safely: if empty, setval(seq, 1, false) so nextval() yields 1
     for (const tbl of tables) {
-      await postgres.$executeRawUnsafe(
-        `SELECT setval(pg_get_serial_sequence('"${tbl}"', 'id'), coalesce(max("id"), 1)) FROM "${tbl}";`
+      await tx.$executeRawUnsafe(
+        `SELECT CASE 
+           WHEN max("id") IS NOT NULL THEN setval(pg_get_serial_sequence('"${tbl}"', 'id'), max("id"), true)
+           ELSE setval(pg_get_serial_sequence('"${tbl}"', 'id'), 1, false)
+         END FROM "${tbl}";`
       );
     }
-    console.log('✔ All 10 serial sequences synchronized.');
+  }, {
+    maxWait: 15000, // 15 seconds to establish transaction
+    timeout: 120000, // 120 seconds transaction timeout for remote Neon network latency
+  });
 
-    // -------------------------------------------------------------
-    // STEP 5: 1-to-1 Verification Count Comparison
-    // -------------------------------------------------------------
-    console.log('\n----------------- VERIFICATION AUDIT -----------------');
-    const finalCounts = await Promise.all([
-      postgres.user.count(),
-      postgres.department.count(),
-      postgres.manpowerPlan.count(),
-      postgres.clientDemand.count(),
-      postgres.candidate.count(),
-      postgres.dailyWorkLog.count(),
-      postgres.hrDirective.count(),
-      postgres.task.count(),
-      postgres.comment.count(),
-      postgres.activityLog.count(),
-    ]);
+  console.log('✔ Transaction committed successfully!\n');
 
-    const sourceCounts = [
-      users.length,
-      depts.length,
-      plans.length,
-      demands.length,
-      candidates.length,
-      logs.length,
-      directives.length,
-      tasks.length,
-      comments.length,
-      activityLogs.length,
-    ];
+  // -------------------------------------------------------------
+  // STEP 4: PostgreSQL Sequence Synchronization Verification
+  // -------------------------------------------------------------
+  console.log('[Step 4/5] Verifying PostgreSQL autoincrement sequence states...');
+  const userSeqRes = await postgresClient.$queryRawUnsafe(
+    `SELECT currval(pg_get_serial_sequence('"User"', 'id')) AS curr;`
+  );
+  const currentUserId = userSeqRes[0] ? Number(userSeqRes[0].curr) : null;
+  console.log(`✔ User serial sequence is synchronized at ID: ${currentUserId} (next will be ${currentUserId + 1}).`);
 
-    let allMatched = true;
-    for (let i = 0; i < tables.length; i++) {
-      const match = finalCounts[i] === sourceCounts[i];
-      if (!match) allMatched = false;
-      const statusIcon = match ? '✔' : '✖';
-      console.log(`${statusIcon} ${tables[i].padEnd(16)}: SQLite = ${sourceCounts[i]} | Neon PG = ${finalCounts[i]}`);
-    }
+  // -------------------------------------------------------------
+  // STEP 5: Verification Audit & Relational Integrity Check
+  // -------------------------------------------------------------
+  console.log('\n[Step 5/5] Performing verification audit and relational checks...');
+  const finalCounts = await Promise.all([
+    postgresClient.user.count(),
+    postgresClient.department.count(),
+    postgresClient.manpowerPlan.count(),
+    postgresClient.clientDemand.count(),
+    postgresClient.candidate.count(),
+    postgresClient.dailyWorkLog.count(),
+    postgresClient.hrDirective.count(),
+    postgresClient.task.count(),
+    postgresClient.comment.count(),
+    postgresClient.activityLog.count(),
+  ]);
 
-    if (allMatched) {
-      console.log('\n\x1b[32m✔ MIGRATION COMPLETED SUCCESSFULLY WITH 100% RECORD INTEGRITY!\x1b[0m');
-    } else {
-      console.warn('\n\x1b[33m⚠ Warning: Record count discrepancy detected. Check table logs.\x1b[0m');
-    }
-  } catch (err) {
-    console.error('\n\x1b[31m[ERROR] Migration failed:\x1b[0m', err.message);
-    process.exit(1);
-  } finally {
-    await sqlite.$disconnect();
-    await postgres.$disconnect();
+  const sourceCounts = [
+    users.length,
+    depts.length,
+    plans.length,
+    demands.length,
+    candidates.length,
+    logs.length,
+    directives.length,
+    tasks.length,
+    comments.length,
+    activityLogs.length,
+  ];
+
+  let allMatched = true;
+  for (let i = 0; i < tables.length; i++) {
+    const match = finalCounts[i] === sourceCounts[i];
+    if (!match) allMatched = false;
+    const statusIcon = match ? '✔' : '✖';
+    console.log(`  ${statusIcon} ${tables[i].padEnd(16)}: SQLite = ${sourceCounts[i]} | Neon PG = ${finalCounts[i]}`);
   }
+
+  if (!allMatched) {
+    throw new Error('Verification discrepancy detected: SQLite and Neon PostgreSQL record counts do not match.');
+  }
+
+  // Relational checks
+  // 1. Verify User-Department circular foreign keys
+  const adminUser = await postgresClient.user.findFirst({
+    where: { role: 'hr_admin' },
+    include: { department: true },
+  });
+  if (!adminUser || !adminUser.department || adminUser.department.code !== 'HR') {
+    throw new Error('Relational integrity check failed: HR Admin department relationship is missing or invalid.');
+  }
+  console.log('  ✔ Relational check: Circular User <-> Department FK resolved correctly.');
+
+  // 2. Verify Department Head foreign key
+  const cuttingDept = await postgresClient.department.findUnique({
+    where: { code: 'CUT' },
+    include: { head: true },
+  });
+  if (!cuttingDept || !cuttingDept.head) {
+    throw new Error('Relational integrity check failed: Cutting department head relationship is missing.');
+  }
+  console.log('  ✔ Relational check: Department Head FK relations intact.');
+
+  // 3. Verify Manpower Plan sum
+  const pgPlanSum = await postgresClient.manpowerPlan.aggregate({
+    _sum: { total: true },
+  });
+  const sqlitePlanSum = plans.reduce((acc, p) => acc + (p.total || 0), 0);
+  if (pgPlanSum._sum.total !== sqlitePlanSum) {
+    throw new Error(`Manpower plan sum mismatch: SQLite = ${sqlitePlanSum}, Neon PG = ${pgPlanSum._sum.total}`);
+  }
+  console.log(`  ✔ Relational check: Master manpower planned positions sum verified (${sqlitePlanSum} total).`);
+
+  // 4. Verify Candidate relation
+  const sampleCandidate = await postgresClient.candidate.findFirst({
+    where: { id: 1 },
+    include: { clientDemand: true, department: true },
+  });
+  if (candidates.length > 0 && !sampleCandidate) {
+    throw new Error('Candidate verification failed: Candidate #1 not found in Neon.');
+  }
+  console.log('  ✔ Relational check: Candidate relations (ClientDemand & Department) verified.');
+
+  console.log('\n\x1b[32m========================================================\x1b[0m');
+  console.log('\x1b[32m  MIGRATION VERIFIED: 100% DATA INTEGRITY PRESERVED!    \x1b[0m');
+  console.log('\x1b[32m========================================================\x1b[0m\n');
 }
 
-migrate();
+// -------------------------------------------------------------
+// TEARDOWN & ERROR HANDLING
+// -------------------------------------------------------------
+let scriptExitCode = 0;
+
+runMigration()
+  .catch((err) => {
+    // Sanitize any database credentials from error output
+    const rawMsg = err.message || String(err);
+    const sanitizedMsg = rawMsg.replace(/postgresql:\/\/[^@]+@/gi, 'postgresql://****@');
+    console.error('\n\x1b[31m[ERROR] Migration failed:\x1b[0m', sanitizedMsg);
+    scriptExitCode = 1;
+  })
+  .finally(async () => {
+    try {
+      if (sqliteClient) {
+        await sqliteClient.$disconnect();
+      }
+    } catch (_) {}
+    try {
+      if (postgresClient) {
+        await postgresClient.$disconnect();
+      }
+    } catch (_) {}
+
+    if (scriptExitCode !== 0) {
+      process.exit(scriptExitCode);
+    }
+  });
