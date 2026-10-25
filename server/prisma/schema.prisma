@@ -1,0 +1,196 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         String    @default("dept_head") // hr_admin, dept_head, supervisor, member
+  designation  String?
+  phone        String?
+  departmentId Int?
+  createdAt    DateTime  @default(now())
+  lastActiveAt DateTime?
+
+  department       Department?    @relation("DepartmentMembers", fields: [departmentId], references: [id])
+  headedDepartment Department?    @relation("DepartmentHead")
+  assignedTasks    Task[]         @relation("AssignedTo")
+  createdTasks     Task[]         @relation("CreatedBy")
+  dailyLogs        DailyWorkLog[]
+  directives       HrDirective[]  @relation("DirectiveAuthor")
+  comments         Comment[]
+  activityLogs     ActivityLog[]
+}
+
+model Department {
+  id              Int       @id @default(autoincrement())
+  name            String    @unique
+  code            String    @unique
+  description     String?
+  headId          Int?      @unique
+  targetManpower  Int       @default(25)
+  currentManpower Int       @default(20)
+  createdAt       DateTime  @default(now())
+
+  head         User?          @relation("DepartmentHead", fields: [headId], references: [id])
+  members      User[]         @relation("DepartmentMembers")
+  workLogs     DailyWorkLog[]
+  tasks        Task[]
+  demands      ClientDemand[]
+  candidates   Candidate[]
+  directives   HrDirective[]
+}
+
+model ManpowerPlan {
+  id             Int      @id @default(autoincrement())
+  dept           String
+  subDept        String?
+  position       String
+  plannedTotal   Int      @default(1)
+  sep            Int      @default(0)
+  oct            Int      @default(0)
+  nov            Int      @default(0)
+  dec            Int      @default(0)
+  jan            Int      @default(0)
+  feb            Int      @default(0)
+  mar            Int      @default(0)
+  apr            Int      @default(0)
+  may            Int      @default(0)
+  total          Int      @default(0)
+  remarks        String?
+  status         String   @default("planned") // appointed, sourcing, discussion, pending_doi, planned
+  appointedNames String?
+  createdAt      DateTime @default(now())
+}
+
+model DailyWorkLog {
+  id               Int      @id @default(autoincrement())
+  departmentId     Int
+  reportedById     Int
+  shiftDate        DateTime @default(now())
+  shift            String   @default("Day Shift") // Day Shift, Night Shift, General
+  targetOutput     Int      @default(0)
+  actualOutput     Int      @default(0)
+  manpowerPresent  Int      @default(0)
+  manpowerRequired Int      @default(0)
+  status           String   @default("On Schedule") // On Schedule, Delayed, Halted, Ahead
+  blockers         String?
+  notes            String?
+  createdAt        DateTime @default(now())
+
+  department Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  reportedBy User       @relation(fields: [reportedById], references: [id])
+  comments   Comment[]
+}
+
+model ClientDemand {
+  id                   Int       @id @default(autoincrement())
+  clientName           String
+  jobProfile           String    // e.g. "10 Production Engineers", "Floor Supervisors"
+  departmentId         Int?
+  requiredCount        Int       @default(10)
+  targetDeploymentDate DateTime? // e.g. Jan 2027
+  sourcingMonth        String    @default("October")
+  interviewMonth       String    @default("November")
+  consultationMonth    String    @default("December")
+  currentPhase         String    @default("Sourcing (Oct)") // Sourcing, Interviews, Consultation, Onboarding, Completed
+  status               String    @default("Active") // Active, Completed, Paused
+  budgetPerRole        String?
+  notes                String?
+  createdAt            DateTime  @default(now())
+
+  department Department? @relation(fields: [departmentId], references: [id])
+  candidates Candidate[]
+}
+
+model Candidate {
+  id                   Int       @id @default(autoincrement())
+  clientDemandId       Int?
+  departmentId         Int?
+  name                 String
+  email                String
+  phone                String?
+  appliedRole          String
+  currentStage         String    @default("Applied") // Sourced, Interview, Consultation, Offered, Onboarding, Joined, Rejected
+  interviewDate        DateTime?
+  consultationDate     DateTime?
+  joiningDate          DateTime?
+  expectedSalary       String?
+  offeredSalary        String?
+  onboardingProgress   Int       @default(0) // 0 to 100%
+  docVerification      Boolean   @default(false)
+  bgvCheck             Boolean   @default(false)
+  safetyInductionDone  Boolean   @default(false)
+  workstationAssigned  Boolean   @default(false)
+  mentorAssigned       Boolean   @default(false)
+  notes                String?
+  createdAt            DateTime  @default(now())
+
+  clientDemand ClientDemand? @relation(fields: [clientDemandId], references: [id])
+  department   Department?   @relation(fields: [departmentId], references: [id])
+  comments     Comment[]
+}
+
+model HrDirective {
+  id                 Int       @id @default(autoincrement())
+  authorId           Int
+  title              String
+  content            String
+  category           String    @default("Recruitment Milestone") // Recruitment Milestone, Policy Update, Shift Notice, Urgent Request
+  priority           String    @default("Normal") // Normal, High, Urgent
+  targetDepartmentId Int?      // null = all 10 departments
+  createdAt          DateTime  @default(now())
+
+  author           User        @relation("DirectiveAuthor", fields: [authorId], references: [id])
+  targetDepartment Department? @relation(fields: [targetDepartmentId], references: [id])
+}
+
+model Task {
+  id           Int       @id @default(autoincrement())
+  title        String
+  description  String?
+  assignedTo   Int
+  createdBy    Int
+  departmentId Int?
+  priority     String    @default("medium") // low, medium, high
+  status       String    @default("todo")   // todo, inprog, review, done
+  dueDate      DateTime?
+  createdAt    DateTime  @default(now())
+  completedAt  DateTime?
+
+  assignee   User        @relation("AssignedTo", fields: [assignedTo], references: [id])
+  creator    User        @relation("CreatedBy",  fields: [createdBy],  references: [id])
+  department Department? @relation(fields: [departmentId], references: [id])
+  comments   Comment[]
+}
+
+model Comment {
+  id             Int       @id @default(autoincrement())
+  taskId         Int?
+  candidateId    Int?
+  dailyWorkLogId Int?
+  userId         Int
+  text           String
+  createdAt      DateTime  @default(now())
+
+  task      Task?         @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  candidate Candidate?    @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  workLog   DailyWorkLog? @relation(fields: [dailyWorkLogId], references: [id], onDelete: Cascade)
+  user      User          @relation(fields: [userId], references: [id])
+}
+
+model ActivityLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  action    String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
