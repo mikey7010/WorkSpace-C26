@@ -431,25 +431,24 @@ async function runMigration() {
   }
 
   // Relational checks
-  // 1. Verify User-Department circular foreign keys
+  // 1. Verify HR Admin executive scope (plant-wide director, departmentId = null)
   const adminUser = await postgresClient.user.findFirst({
     where: { role: 'hr_admin' },
-    include: { department: true },
   });
-  if (!adminUser || !adminUser.department || adminUser.department.code !== 'HR') {
-    throw new Error('Relational integrity check failed: HR Admin department relationship is missing or invalid.');
+  if (!adminUser || adminUser.departmentId !== null) {
+    throw new Error('Relational integrity check failed: HR Admin role or department assignment is invalid.');
   }
-  console.log('  ✔ Relational check: Circular User <-> Department FK resolved correctly.');
+  console.log('  ✔ Relational check: HR Admin executive plant-wide role verified (departmentId = null).');
 
-  // 2. Verify Department Head foreign key
+  // 2. Verify bidirectional User <-> Department circular foreign keys on Cutting Dept
   const cuttingDept = await postgresClient.department.findUnique({
     where: { code: 'CUT' },
     include: { head: true },
   });
-  if (!cuttingDept || !cuttingDept.head) {
-    throw new Error('Relational integrity check failed: Cutting department head relationship is missing.');
+  if (!cuttingDept || !cuttingDept.head || cuttingDept.head.departmentId !== cuttingDept.id) {
+    throw new Error('Relational integrity check failed: Cutting department circular head relationship is broken.');
   }
-  console.log('  ✔ Relational check: Department Head FK relations intact.');
+  console.log('  ✔ Relational check: Circular User <-> Department FK relations verified on Cutting department.');
 
   // 3. Verify Manpower Plan sum
   const pgPlanSum = await postgresClient.manpowerPlan.aggregate({
@@ -463,11 +462,11 @@ async function runMigration() {
 
   // 4. Verify Candidate relation
   const sampleCandidate = await postgresClient.candidate.findFirst({
-    where: { id: 1 },
+    orderBy: { id: 'asc' },
     include: { clientDemand: true, department: true },
   });
   if (candidates.length > 0 && !sampleCandidate) {
-    throw new Error('Candidate verification failed: Candidate #1 not found in Neon.');
+    throw new Error('Candidate verification failed: Earliest candidate not found in Neon.');
   }
   console.log('  ✔ Relational check: Candidate relations (ClientDemand & Department) verified.');
 
