@@ -3,6 +3,10 @@ node_modules/
 .env.*
 !.env.example
 *.log
+*.db
+backups/
+prisma/sqlite-client/
+prisma/sqlite-schema.prisma
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
