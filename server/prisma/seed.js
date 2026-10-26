@@ -102,12 +102,12 @@ async function main() {
 
   // 3. Additional Key Managers & First-Wave Appointed Leaders
   const extraLeaders = [
-    { name: 'Johnny',            email: 'johnny.gap@workspace.app',      designation: 'Sr Manager (GAP Regional Office)', role: 'dept_head' },
-    { name: 'Md. Imroz',         email: 'imroz.purchasing@workspace.app', designation: 'Manager (Purchasing)',             role: 'dept_head' },
-    { name: 'Riti',              email: 'riti.it@workspace.app',         designation: 'Manager (IT & MES)',               role: 'dept_head' },
-    { name: 'Eric',              email: 'eric.lean@workspace.app',       designation: 'Manager (Lean Production)',        role: 'dept_head' },
-    { name: 'Schum',             email: 'schum.planning@workspace.app',  designation: 'Sr. Supervisor (Production Plan)', role: 'dept_head' },
-    { name: 'Duty Manager',      email: 'duty.manager@workspace.app',    designation: 'Duty Manager (Assembly Floor)',    role: 'dept_head' },
+    { name: 'Johnny',            email: 'johnny.gap@workspace.app',      designation: 'Sr Manager (GAP Regional Office)', role: 'dept_head', deptCode: 'ADM' },
+    { name: 'Md. Imroz',         email: 'imroz.purchasing@workspace.app', designation: 'Manager (Purchasing)',             role: 'dept_head', deptCode: 'SCM' },
+    { name: 'Riti',              email: 'riti.it@workspace.app',         designation: 'Manager (IT & MES)',               role: 'dept_head', deptCode: 'QC' },
+    { name: 'Eric',              email: 'eric.lean@workspace.app',       designation: 'Manager (Lean Production)',        role: 'dept_head', deptCode: 'SCM' },
+    { name: 'Schum',             email: 'schum.planning@workspace.app',  designation: 'Sr. Supervisor (Production Plan)', role: 'dept_head', deptCode: 'SCM' },
+    { name: 'Duty Manager',      email: 'duty.manager@workspace.app',    designation: 'Duty Manager (Assembly Floor)',    role: 'dept_head', deptCode: 'ASSY' },
   ];
 
   for (const l of extraLeaders) {
@@ -118,6 +118,7 @@ async function main() {
         passwordHash: deptHash,
         role: l.role,
         designation: l.designation,
+        departmentId: createdDepts.find(c => c.dept.code === l.deptCode)?.dept.id,
       },
     });
   }

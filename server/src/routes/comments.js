@@ -5,6 +5,9 @@ const { requireAuth } = require('../middleware/auth');
 
 const prisma = new PrismaClient();
 
+// HR Head (hr_admin) has the same rights as admin on the task board
+const isManager = u => u && (u.role === 'admin' || u.role === 'hr_admin');
+
 // GET /api/comments?taskId=X
 router.get('/', requireAuth, async (req, res, next) => {
   try {
@@ -12,7 +15,7 @@ router.get('/', requireAuth, async (req, res, next) => {
     if (!taskId) return res.status(400).json({ error: 'taskId required.' });
     const task = await prisma.task.findUnique({ where: { id: taskId } });
     if (!task) return res.status(404).json({ error: 'Task not found.' });
-    if (req.user.role !== 'admin' && task.assignedTo !== req.user.id)
+    if (!isManager(req.user) && task.assignedTo !== req.user.id)
       return res.status(403).json({ error: 'Access denied.' });
     const comments = await prisma.comment.findMany({
       where: { taskId },
@@ -29,7 +32,7 @@ router.post('/', requireAuth, async (req, res, next) => {
     const { taskId, text } = z.object({ taskId: z.number(), text: z.string().min(1) }).parse(req.body);
     const task = await prisma.task.findUnique({ where: { id: taskId } });
     if (!task) return res.status(404).json({ error: 'Task not found.' });
-    if (req.user.role !== 'admin' && task.assignedTo !== req.user.id)
+    if (!isManager(req.user) && task.assignedTo !== req.user.id)
       return res.status(403).json({ error: 'Access denied.' });
     const comment = await prisma.comment.create({
       data: { taskId, userId: req.user.id, text },

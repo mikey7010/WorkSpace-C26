@@ -5,6 +5,9 @@ const { requireAuth, requireAdmin } = require('../middleware/auth');
 
 const prisma = new PrismaClient();
 
+// HR Head (hr_admin) has the same rights as admin on the task board
+const isManager = u => u && (u.role === 'admin' || u.role === 'hr_admin');
+
 const taskSelect = {
   id:true, title:true, description:true, priority:true, status:true, dueDate:true,
   createdAt:true, completedAt:true,
@@ -33,11 +36,11 @@ const updateSchema = z.object({
 // GET /api/tasks — admin: all tasks; member: own tasks
 router.get('/', requireAuth, async (req, res, next) => {
   try {
-    const where = req.user.role === 'admin' ? {} : { assignedTo: req.user.id };
+    const where = isManager(req.user) ? {} : { assignedTo: req.user.id };
     const { status, priority, assignedTo } = req.query;
     if (status)     where.status   = status;
     if (priority)   where.priority = priority;
-    if (assignedTo && req.user.role === 'admin') where.assignedTo = parseInt(assignedTo);
+    if (assignedTo && isManager(req.user)) where.assignedTo = parseInt(assignedTo);
 
     const tasks = await prisma.task.findMany({
       where, select: taskSelect, orderBy: { createdAt: 'desc' },
@@ -51,7 +54,7 @@ router.get('/:id', requireAuth, async (req, res, next) => {
   try {
     const task = await prisma.task.findUnique({ where: { id: parseInt(req.params.id) }, select: taskSelect });
     if (!task) return res.status(404).json({ error: 'Task not found.' });
-    if (req.user.role !== 'admin' && task.assignee.id !== req.user.id)
+    if (!isManager(req.user) && task.assignee.id !== req.user.id)
       return res.status(403).json({ error: 'Access denied.' });
     res.json(task);
   } catch (err) { next(err); }
@@ -84,12 +87,12 @@ router.put('/:id', requireAuth, async (req, res, next) => {
     const id = parseInt(req.params.id);
     const existing = await prisma.task.findUnique({ where: { id }, include: { assignee: true } });
     if (!existing) return res.status(404).json({ error: 'Task not found.' });
-    if (req.user.role !== 'admin' && existing.assignedTo !== req.user.id)
+    if (!isManager(req.user) && existing.assignedTo !== req.user.id)
       return res.status(403).json({ error: 'Access denied.' });
 
     // Members can only change status
     let data = updateSchema.parse(req.body);
-    if (req.user.role !== 'admin') data = { status: data.status };
+    if (!isManager(req.user)) data = { status: data.status };
 
     const completedAt = data.status === 'done' && existing.status !== 'done'
       ? new Date() : (data.status && data.status !== 'done' ? null : undefined);
