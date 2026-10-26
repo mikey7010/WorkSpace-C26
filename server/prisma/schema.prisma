@@ -27,6 +27,7 @@ model User {
   directives       HrDirective[]  @relation("DirectiveAuthor")
   comments         Comment[]
   activityLogs     ActivityLog[]
+  ownedHiringCandidates HiringCandidate[] @relation("HiringCandidateOwner")
 }
 
 model Department {
@@ -46,6 +47,7 @@ model Department {
   demands      ClientDemand[]
   candidates   Candidate[]
   directives   HrDirective[]
+  hiringPositions HiringPosition[]
 }
 
 model ManpowerPlan {
@@ -195,41 +197,136 @@ model ActivityLog {
   user User @relation(fields: [userId], references: [id])
 }
 
-// ---------------- HIRING TRACKER (Work + Summary) ----------------
-// One row per Dept + Position from the SMART MASTER sheet.
+// ---------------- RECRUITMENT MANAGEMENT (Work Plan / Summary / Candidate Tracking) ----------------
+// Source of truth:
+//   HiringPosition  = recruitment requirement (Dept + Position + No. of workers needed)
+//   HiringPeriod    = configured planning months (columns of the Work Plan)
+//   HiringMonth     = HOD requirement + remarks for one requirement in one month
+//   HiringCandidate = one row per person HR selects; stage/status tracked per candidate
+// HR-selected counts, stage counts, joined and balance are always CALCULATED from HiringCandidate.
+
 model HiringPosition {
-  id         Int           @id @default(autoincrement())
-  dept       String
-  position   String
-  totalNeed  Int           @default(0)
-  sortOrder  Int           @default(0)
-  createdAt  DateTime      @default(now())
-  updatedAt  DateTime      @updatedAt
-  months     HiringMonth[]
+  id           Int               @id @default(autoincrement())
+  dept         String
+  position     String
+  totalNeed    Int               @default(0) // No. of workers needed (approved total)
+  sortOrder    Int               @default(0)
+  departmentId Int?              // link to Department → which HOD may edit it
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  department   Department?       @relation(fields: [departmentId], references: [id])
+  months       HiringMonth[]
+  candidates   HiringCandidate[]
 
   @@unique([dept, position, sortOrder])
+  @@index([dept])
+  @@index([position])
+  @@index([departmentId])
 }
 
-// One entry per position per month (e.g. "2026-09").
-// HOD fills hodCount (how many needed); HR fills hrCount (how many selected)
-// and splits the selected people across the four stages.
+model HiringPeriod {
+  id        Int      @id @default(autoincrement())
+  month     String   @unique // YYYY-MM
+  year      Int
+  monthNum  Int
+  createdBy String?
+  createdAt DateTime @default(now())
+
+  @@index([year])
+}
+
 model HiringMonth {
-  id           Int            @id @default(autoincrement())
-  positionId   Int
-  month        String         // YYYY-MM
-  hodCount     Int            @default(0)
-  hrCount      Int            @default(0)
-  sourcing     Int            @default(0)
-  onboarding   Int            @default(0)
-  offerIssued  Int            @default(0)
-  joined       Int            @default(0)
-  joiningDate  String?        // free text / date, e.g. "16.11.2026"
-  remarks      String?
-  updatedBy    String?
-  updatedAt    DateTime       @updatedAt
-  createdAt    DateTime       @default(now())
+  id               Int            @id @default(autoincrement())
+  positionId       Int
+  month            String         // YYYY-MM
+  hodCount         Int            @default(0) // HOD requirement for this month
+  remarks          String?
+  allowExceed      Boolean        @default(false) // HR Head approved selecting more than HOD requirement
+  exceedApprovedBy String?
+  exceedNote       String?
+  // Legacy aggregate columns from the first Excel import. No longer used for counting —
+  // they were converted into individual HiringCandidate rows. Kept so no data is lost.
+  hrCount          Int            @default(0)
+  sourcing         Int            @default(0)
+  onboarding       Int            @default(0)
+  offerIssued      Int            @default(0)
+  joined           Int            @default(0)
+  joiningDate      String?
+  updatedBy        String?
+  updatedAt        DateTime       @updatedAt
+  createdAt        DateTime       @default(now())
 
   position HiringPosition @relation(fields: [positionId], references: [id], onDelete: Cascade)
 
   @@unique([positionId, month])
+  @@index([month])
+}
+
+model HiringCandidate {
+  id                  Int                      @id @default(autoincrement())
+  positionId          Int                      // recruitment requirement
+  plannedMonth        String                   // YYYY-MM the candidate is currently allocated to
+  originalMonth       String                   // YYYY-MM first allocated to (never changes)
+  name                String
+  phone               String?
+  email               String?
+  ownerId             Int?                     // HR executive responsible
+  stage               String                   @default("sourcing") // sourcing | onboarding | offer_issued | joining
+  status              String                   @default("active")   // active | on_hold | rejected | withdrawn | joined
+  sourcingDate        DateTime?
+  sourceDetails       String?
+  onboardingDate      DateTime?
+  onboardingProgress  Int                      @default(0)
+  offerIssuedDate     DateTime?
+  offerStatus         String?                  // pending | accepted | declined
+  expectedJoiningDate DateTime?
+  actualJoiningDate   DateTime?
+  remarks             String?
+  createdById         Int?
+  createdAt           DateTime                 @default(now())
+  updatedAt           DateTime                 @updatedAt
+
+  position HiringPosition           @relation(fields: [positionId], references: [id])
+  owner    User?                    @relation("HiringCandidateOwner", fields: [ownerId], references: [id])
+  history  HiringCandidateHistory[]
+
+  @@index([positionId, plannedMonth])
+  @@index([plannedMonth])
+  @@index([status])
+  @@index([stage])
+  @@index([ownerId])
+}
+
+model HiringCandidateHistory {
+  id          Int             @id @default(autoincrement())
+  candidateId Int
+  action      String          // created | stage | status | planned_month | details
+  fromValue   String?
+  toValue     String?
+  note        String?
+  userId      Int?
+  userName    String?
+  createdAt   DateTime        @default(now())
+
+  candidate HiringCandidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+
+  @@index([candidateId])
+}
+
+// Audit trail for requirement / month / period changes
+model HiringAudit {
+  id         Int      @id @default(autoincrement())
+  entity     String   // requirement | month | period | system
+  entityId   Int?
+  positionId Int?
+  month      String?
+  field      String
+  oldValue   String?
+  newValue   String?
+  userId     Int?
+  userName   String?
+  createdAt  DateTime @default(now())
+
+  @@index([positionId])
+  @@index([entity, field])
 }

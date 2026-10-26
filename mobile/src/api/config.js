@@ -1,9 +1,17 @@
 // Mobile API Configuration
 // Supports production cloud HTTPS URL via Expo public environment variables,
 // with graceful fallback to LAN IP for local WiFi development.
+import { Platform } from 'react-native';
+
 export const CLOUD_SERVER_URL = process.env.EXPO_PUBLIC_API_URL || process.env.EXPO_PUBLIC_SERVER_URL || null;
-export const LOCAL_DEV_URL    = 'http://192.168.31.177:4000';
-export const DEFAULT_SERVER_URL = CLOUD_SERVER_URL || LOCAL_DEV_URL;
+
+// When the app is opened in a browser from this laptop (npx expo start --web → localhost:8081),
+// talk to the backend running on the same laptop (npm run dev → port 4000).
+const IS_LOCAL_WEB = Platform.OS === 'web' && typeof window !== 'undefined' && !!window.location &&
+  /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname);
+
+export const LOCAL_DEV_URL    = IS_LOCAL_WEB ? `http://${window.location.hostname}:4000` : 'http://192.168.31.177:4000';
+export const DEFAULT_SERVER_URL = IS_LOCAL_WEB ? LOCAL_DEV_URL : (CLOUD_SERVER_URL || LOCAL_DEV_URL);
 const STORAGE_KEY = '@workspace_c26_server_url';
 
 let AsyncStorage = null;
@@ -52,7 +60,8 @@ export async function loadSavedServerUrl() {
   try {
     if (AsyncStorage?.getItem) {
       const saved = await AsyncStorage.getItem(STORAGE_KEY);
-      if (saved && saved.trim()) {
+      // On local web, an old saved cloud URL would point at a server without the newest code — prefer local
+      if (saved && saved.trim() && !(IS_LOCAL_WEB && CLOUD_SERVER_URL && sanitizeUrl(saved) === sanitizeUrl(CLOUD_SERVER_URL))) {
         currentServerUrl = sanitizeUrl(saved);
         return currentServerUrl;
       }
@@ -159,6 +168,9 @@ export async function apiRequest(endpoint, method = 'GET', body = null, token = 
   try {
     data = await res.json();
   } catch (error) {
+    if (res.status === 404) {
+      throw new Error(`The server at ${baseUrl} does not have this feature yet (${endpoint.split('?')[0]}). Update/redeploy that server, or open Server Connection Settings and switch to a server running the latest code.`);
+    }
     throw new Error(`The server returned an invalid response (HTTP ${res.status}). Check the backend logs.`);
   }
 

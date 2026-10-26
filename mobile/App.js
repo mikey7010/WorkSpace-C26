@@ -14,6 +14,7 @@ import {
   Platform,
   RefreshControl,
   KeyboardAvoidingView,
+  BackHandler,
 } from 'react-native';
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
@@ -29,7 +30,18 @@ import {
   LOCAL_DEV_URL,
 } from './src/api/config';
 import { io } from 'socket.io-client';
-import HiringTracker from './src/HiringTracker';
+import RmWorkPlan from './src/screens/recruitment/WorkPlan';
+import RmSummary from './src/screens/recruitment/Summary';
+import RmCandidates from './src/screens/recruitment/Candidates';
+import CommandCenter from './src/screens/CommandCenter';
+import ManpowerMatrix from './src/screens/ManpowerMatrix';
+import DepartmentsHub from './src/screens/DepartmentsHub';
+import WorkReports from './src/screens/WorkReports';
+import Recruitment from './src/screens/Recruitment';
+import Onboarding from './src/screens/Onboarding';
+import Directives from './src/screens/Directives';
+import TaskBoard from './src/screens/TaskBoard';
+import DeptDashboard from './src/screens/DeptDashboard';
 
 const STATUS_BAR_HEIGHT = Platform.OS === 'android' ? (StatusBar.currentHeight || 24) : 0;
 const AuthContext = createContext(null);
@@ -42,6 +54,37 @@ function AppIcon({ name, size = 18, color = '#fff', style }) {
   }
 }
 
+
+// ----------------- NAVIGATION (same sections as the website sidebar) -----------------
+const HR_NAV = [
+  { key: 'dashboard',   label: 'Command Center',      short: 'Command',  icon: 'home-outline',          active: 'home' },
+  { key: 'matrix',      label: 'C26 Manpower Matrix', short: 'Matrix',   icon: 'list-outline',          active: 'list' },
+  { key: 'departments', label: 'Factory Departments', short: 'Depts',    icon: 'business-outline',      active: 'business' },
+  { key: 'reports',     label: 'Daily Work Reports',  short: 'Reports',  icon: 'document-text-outline', active: 'document-text' },
+  { key: 'recruitment', label: 'Recruitment Demands', short: 'Recruit',  icon: 'people-outline',        active: 'people' },
+  { key: 'onboarding',  label: 'Onboarding Tracker',  short: 'Onboard',  icon: 'clipboard-outline',     active: 'clipboard' },
+  { key: 'directives',  label: 'HR Broadcasts',       short: 'Broadcast', icon: 'megaphone-outline',    active: 'megaphone' },
+  { key: 'tasks',       label: 'Task Board',          short: 'Tasks',    icon: 'checkbox-outline',      active: 'checkbox' },
+  { section: 'Recruitment Management' },
+  { key: 'rm-plan',       label: 'Work / Recruitment Plan', short: 'Plan',       icon: 'grid-outline',          active: 'grid' },
+  { key: 'rm-summary',    label: 'Summary',                 short: 'Summary',    icon: 'bar-chart-outline',     active: 'bar-chart' },
+  { key: 'rm-candidates', label: 'Candidate Tracking',      short: 'Candidates', icon: 'person-outline',        active: 'person' },
+];
+const DEPT_NAV = [
+  { key: 'dept',        label: 'My Department Live',   short: 'My Dept', icon: 'business-outline',      active: 'business' },
+  { key: 'matrix',      label: 'C26 Plant Matrix',     short: 'Matrix',  icon: 'list-outline',          active: 'list' },
+  { key: 'reports',     label: 'Department Logs',      short: 'Logs',    icon: 'document-text-outline', active: 'document-text' },
+  { key: 'onboarding',  label: 'New Recruits & Hires', short: 'Recruits', icon: 'people-outline',       active: 'people' },
+  { key: 'directives',  label: 'HR Directives',        short: 'Directives', icon: 'megaphone-outline',  active: 'megaphone' },
+  { key: 'tasks',       label: 'My Tasks',             short: 'Tasks',   icon: 'checkbox-outline',      active: 'checkbox' },
+  { section: 'Recruitment Management' },
+  { key: 'rm-plan',       label: 'Work / Recruitment Plan', short: 'Plan',       icon: 'grid-outline',          active: 'grid' },
+  { key: 'rm-summary',    label: 'Summary',                 short: 'Summary',    icon: 'bar-chart-outline',     active: 'bar-chart' },
+  { key: 'rm-candidates', label: 'Candidate Tracking',      short: 'Candidates', icon: 'person-outline',        active: 'person' },
+];
+const HR_TABS = ['dashboard', 'matrix', 'rm-plan', 'rm-candidates'];
+const DEPT_TABS = ['dept', 'rm-plan', 'rm-summary', 'reports'];
+
 export default function App() {
   const [user, setUser]             = useState(null);
   const [token, setToken]           = useState(null);
@@ -50,72 +93,84 @@ export default function App() {
   const [showConfig, setShowConfig] = useState(false);
   const [liveNotice, setLiveNotice] = useState(null);
   const [socketOnline, setOnline]   = useState(false);
-  const [hiringTick, setHiringTick] = useState(0);
+  const [refreshTick, setTick]      = useState(0);
+  const [drawerOpen, setDrawer]     = useState(false);
+  const [screenParams, setParams]   = useState(null);
 
-  // Restore saved server URL from storage on startup
   useEffect(() => {
-    loadSavedServerUrl().then(saved => {
-      if (saved) setHost(saved);
-    });
+    loadSavedServerUrl().then(saved => { if (saved) setHost(saved); });
   }, []);
 
-  // Connect to Socket.io for Realtime events on mobile (with cloud websocket & polling fallback)
+  // Realtime events → toast + refresh the open screen
   useEffect(() => {
     let socket;
     try {
       socket = io(getServerUrl(), {
-        transports: ['websocket', 'polling'],
-        timeout: 10000,
-        reconnection: true,
-        reconnectionAttempts: Infinity,
-        reconnectionDelay: 1000,
-        reconnectionDelayMax: 5000,
+        transports: ['websocket', 'polling'], timeout: 10000, reconnection: true,
+        reconnectionAttempts: Infinity, reconnectionDelay: 1000, reconnectionDelayMax: 5000,
       });
-
       socket.on('connect', () => setOnline(true));
       socket.on('disconnect', () => setOnline(false));
       socket.on('connect_error', () => setOnline(false));
-
       socket.on('directive:new', dir => {
         setLiveNotice(`📢 HR Directive: "${dir.title}"`);
         setTimeout(() => setLiveNotice(null), 6000);
+        setTick(t => t + 1);
       });
-
-      socket.on('hiring:update', () => setHiringTick(t => t + 1));
-
       socket.on('worklog:new', log => {
         setLiveNotice(`🏭 Work Report: ${log.department?.name || 'Department'} (${log.actualOutput || 0} units)`);
         setTimeout(() => setLiveNotice(null), 6000);
+        setTick(t => t + 1);
       });
+      socket.on('hiring:update', () => setTick(t => t + 1));
     } catch (e) {
-      console.log('Socket connection error', e);
       setOnline(false);
     }
     return () => socket && socket.disconnect();
   }, [serverHost]);
 
+  const isHr = !!user && (user.role === 'hr_admin' || user.role === 'admin');
+  const nav = isHr ? HR_NAV : DEPT_NAV;
+  const home = isHr ? 'dashboard' : 'dept';
+
+  // Android back: close drawer, then go back to the home section
+  useEffect(() => {
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (drawerOpen) { setDrawer(false); return true; }
+      if (user && currentTab !== home) { setTab(home); return true; }
+      return false;
+    });
+    return () => sub.remove();
+  }, [drawerOpen, currentTab, user, home]);
+
   async function login(email, password) {
     const res = await apiRequest('/auth/login', 'POST', { email, password });
     setUser(res.user);
     setToken(res.token);
-    setTab(res.user.role === 'hr_admin' || res.user.role === 'admin' ? 'dashboard' : 'floor');
+    setTab(res.user.role === 'hr_admin' || res.user.role === 'admin' ? 'dashboard' : 'dept');
     return res.user;
   }
 
   function logout() {
+    setDrawer(false);
     setUser(null);
     setToken(null);
   }
 
-  const isHr = user && (user.role === 'hr_admin' || user.role === 'admin');
+  const api = useCallback((path, method = 'GET', body = null) => apiRequest(path, method, body, token), [token]);
+  const current = nav.find(n => n.key === currentTab) || nav.find(n => n.key);
+  const navigate = (key, params = null) => { setParams(params); setTab(key); setDrawer(false); };
+  const screenProps = { api, user, token, isHr, refreshSignal: refreshTick, navigate, params: screenParams };
+  const tabKeys = isHr ? HR_TABS : DEPT_TABS;
+
+  function go(key) { setParams(null); setTab(key); setDrawer(false); }
 
   return (
     <AuthContext.Provider value={{ user, token, login, logout }}>
       <SafeAreaView style={styles.container}>
         <ExpoStatusBar style="light" />
-        <StatusBar barStyle="light-content" backgroundColor="#090d16" translucent={Platform.OS === 'android'} />
+        <StatusBar barStyle="light-content" backgroundColor="#0f172a" translucent={Platform.OS === 'android'} />
 
-        {/* Realtime Live Toast Banner */}
         {liveNotice && (
           <View style={[styles.realtimeBanner, { marginTop: Platform.OS === 'android' ? STATUS_BAR_HEIGHT : 0 }]}>
             <AppIcon name="radio-outline" size={14} color="#fff" />
@@ -127,68 +182,62 @@ export default function App() {
           <LoginScreen onOpenConfig={() => setShowConfig(true)} />
         ) : (
           <View style={styles.mainLayout}>
-            {/* Mobile Header with safe area padding */}
             <View style={[styles.header, { paddingTop: Platform.OS === 'android' ? STATUS_BAR_HEIGHT + 10 : 12 }]}>
+              <TouchableOpacity onPress={() => setDrawer(true)} style={[styles.headerIconBtn, { marginRight: 12 }]} accessibilityLabel="Open menu">
+                <AppIcon name="menu" size={20} color="#e2e8f0" />
+              </TouchableOpacity>
               <View style={{ flex: 1 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                  <Text style={styles.headerTitle}>WorkSpace C26</Text>
+                  <Text style={styles.headerTitle} numberOfLines={1}>{current.label}</Text>
                   <View style={[styles.socketDot, { backgroundColor: socketOnline ? '#10b981' : '#f59e0b' }]} />
                 </View>
                 <Text style={styles.headerSub} numberOfLines={1}>
-                  {user.name} • {user.role === 'hr_admin' ? 'HR Head' : (user.department?.code || 'Dept Head')}
+                  {isHr ? 'HR Executive Command' : (user.department?.name || 'Department Hub')}
                 </Text>
               </View>
-
-              <View style={styles.headerActions}>
-                <TouchableOpacity
-                  onPress={() => setShowConfig(true)}
-                  style={styles.headerIconBtn}
-                  accessibilityLabel="Server connection settings"
-                >
-                  <AppIcon name="server-outline" size={17} color="#94a3b8" />
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={logout} style={styles.logoutBtn} accessibilityLabel="Sign out">
-                  <AppIcon name="log-out-outline" size={14} color="#f87171" />
-                  <Text style={styles.logoutBtnText}>Sign Out</Text>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity onPress={() => setShowConfig(true)} style={styles.headerIconBtn} accessibilityLabel="Server connection settings">
+                <AppIcon name="server-outline" size={17} color="#94a3b8" />
+              </TouchableOpacity>
             </View>
 
-            {/* Screen Content based on Active Tab — inside flex 1, never obscured */}
             <View style={styles.screenContainer}>
-              {currentTab === 'dashboard' && <HrDashboardView token={token} />}
-              {currentTab === 'matrix' && <ManpowerMatrixView token={token} />}
-              {currentTab === 'floor' && <DeptHeadFloorView user={user} token={token} />}
-              {currentTab === 'onboarding' && <OnboardingView token={token} />}
-              {currentTab === 'directives' && <DirectivesView user={user} token={token} />}
-              {currentTab === 'hiring' && <HiringTracker user={user} token={token} refreshSignal={hiringTick} />}
+              {currentTab === 'dashboard'   && <CommandCenter {...screenProps} />}
+              {currentTab === 'dept'        && <DeptDashboard {...screenProps} />}
+              {currentTab === 'matrix'      && <ManpowerMatrix {...screenProps} />}
+              {currentTab === 'rm-plan'       && <RmWorkPlan {...screenProps} />}
+              {currentTab === 'rm-summary'    && <RmSummary {...screenProps} />}
+              {currentTab === 'rm-candidates' && <RmCandidates {...screenProps} />}
+              {currentTab === 'departments' && <DepartmentsHub {...screenProps} />}
+              {currentTab === 'reports'     && <WorkReports {...screenProps} />}
+              {currentTab === 'recruitment' && <Recruitment {...screenProps} />}
+              {currentTab === 'onboarding'  && <Onboarding {...screenProps} />}
+              {currentTab === 'directives'  && <Directives {...screenProps} />}
+              {currentTab === 'tasks'       && <TaskBoard {...screenProps} />}
             </View>
 
-            {/* Bottom Tab Navigation in flex flow with Android bottom inset */}
             <View style={styles.bottomNav}>
-              {isHr ? (
-                <>
-                  <TabItem label="Command" active={currentTab === 'dashboard'} onPress={() => setTab('dashboard')} icon="speedometer-outline" activeIcon="speedometer" />
-                  <TabItem label="C26 Matrix" active={currentTab === 'matrix'} onPress={() => setTab('matrix')} icon="grid-outline" activeIcon="grid" />
-                  <TabItem label="Hiring" active={currentTab === 'hiring'} onPress={() => setTab('hiring')} icon="briefcase-outline" activeIcon="briefcase" />
-                  <TabItem label="Onboard" active={currentTab === 'onboarding'} onPress={() => setTab('onboarding')} icon="people-outline" activeIcon="people" />
-                  <TabItem label="Directives" active={currentTab === 'directives'} onPress={() => setTab('directives')} icon="megaphone-outline" activeIcon="megaphone" />
-                </>
-              ) : (
-                <>
-                  <TabItem label="Floor Work" active={currentTab === 'floor'} onPress={() => setTab('floor')} icon="construct-outline" activeIcon="construct" />
-                  <TabItem label="C26 Matrix" active={currentTab === 'matrix'} onPress={() => setTab('matrix')} icon="grid-outline" activeIcon="grid" />
-                  <TabItem label="Hiring" active={currentTab === 'hiring'} onPress={() => setTab('hiring')} icon="briefcase-outline" activeIcon="briefcase" />
-                  <TabItem label="Onboard" active={currentTab === 'onboarding'} onPress={() => setTab('onboarding')} icon="people-outline" activeIcon="people" />
-                  <TabItem label="Directives" active={currentTab === 'directives'} onPress={() => setTab('directives')} icon="megaphone-outline" activeIcon="megaphone" />
-                </>
-              )}
+              {tabKeys.map(k => {
+                const n = nav.find(x => x.key === k);
+                return <TabItem key={k} label={n.short} active={currentTab === k} onPress={() => go(k)} icon={n.icon} activeIcon={n.active} />;
+              })}
+              <TabItem label="More" active={!tabKeys.includes(currentTab)} onPress={() => setDrawer(true)} icon="grid-outline" activeIcon="grid" />
             </View>
           </View>
         )}
 
-        {/* Server IP Configuration Modal with Live Ping Test & Persistent Storage */}
+        {user && (
+          <SideDrawer
+            visible={drawerOpen}
+            onClose={() => setDrawer(false)}
+            nav={nav}
+            current={currentTab}
+            onSelect={go}
+            user={user}
+            isHr={isHr}
+            onLogout={logout}
+          />
+        )}
+
         <ServerConfigModal
           visible={showConfig}
           initialUrl={serverHost}
@@ -197,6 +246,62 @@ export default function App() {
         />
       </SafeAreaView>
     </AuthContext.Provider>
+  );
+}
+
+// ----------------- SIDE DRAWER (mirrors website sidebar) -----------------
+function SideDrawer({ visible, onClose, nav, current, onSelect, user, isHr, onLogout }) {
+  return (
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+      <View style={styles.drawerOverlay}>
+        <View style={[styles.drawer, { paddingTop: (Platform.OS === 'android' ? STATUS_BAR_HEIGHT : 0) + 18 }]}>
+          <View style={styles.drawerBrand}>
+            <View style={styles.drawerLogo}>
+              <AppIcon name="business" size={18} color="#fff" />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.drawerBrandTitle}>WorkSpace HR</Text>
+              <Text style={styles.drawerBrandSub} numberOfLines={1}>
+                {isHr ? 'HR EXECUTIVE COMMAND' : (user.department?.name || 'DEPARTMENT HUB').toUpperCase()}
+              </Text>
+            </View>
+          </View>
+
+          <ScrollView style={{ flex: 1 }} contentContainerStyle={{ gap: 4 }}>
+            {nav.map(item => {
+              if (item.section) return <Text key={item.section} style={styles.drawerSection}>{item.section.toUpperCase()}</Text>;
+              const active = item.key === current;
+              return (
+                <TouchableOpacity key={item.key} onPress={() => onSelect(item.key)} style={[styles.drawerItem, active && styles.drawerItemActive]} activeOpacity={0.75}>
+                  <AppIcon name={active ? item.active : item.icon} size={17} color={active ? '#fff' : '#94a3b8'} />
+                  <Text style={[styles.drawerItemText, active && { color: '#fff' }]}>{item.label}</Text>
+                  {item.key === 'rm-candidates' && !active ? <Text style={styles.drawerNew}>NEW</Text> : null}
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
+
+          <View style={styles.drawerFooter}>
+            <View style={styles.drawerUser}>
+              <View style={[styles.drawerAvatar, { backgroundColor: ['#6366f1', '#22c55e', '#f59e0b', '#3b82f6', '#ec4899', '#14b8a6', '#f97316', '#8b5cf6', '#06b6d4', '#84cc16'][(user.id || 1) % 10] }]}>
+                <Text style={{ color: '#fff', fontWeight: '800', fontSize: 12 }}>
+                  {(user.name || 'U').split(' ').filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase()}
+                </Text>
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={{ color: '#fff', fontWeight: '800', fontSize: 13 }} numberOfLines={1}>{user.name}</Text>
+                <Text style={{ color: '#818cf8', fontSize: 11 }} numberOfLines={1}>{user.designation || (isHr ? 'HR Executive' : 'Department Head')}</Text>
+              </View>
+            </View>
+            <TouchableOpacity onPress={onLogout} style={styles.drawerLogout}>
+              <Text style={{ color: '#f87171', fontWeight: '700', fontSize: 13 }}>Sign Out</Text>
+              <AppIcon name="log-out-outline" size={16} color="#f87171" />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <TouchableOpacity style={{ flex: 1 }} activeOpacity={1} onPress={onClose} accessibilityLabel="Close menu" />
+      </View>
+    </Modal>
   );
 }
 
@@ -496,646 +601,6 @@ function ProfileQuickBtn({ title, badge, badgeColor, email, onPress }) {
   );
 }
 
-// ----------------- HR DASHBOARD VIEW -----------------
-function HrDashboardView({ token }) {
-  const [data, setData]             = useState(null);
-  const [loading, setLoading]       = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-
-  const load = useCallback(() => {
-    return apiRequest('/analytics/hr-overview', 'GET', null, token)
-      .then(setData)
-      .catch(err => console.error('Dashboard load error:', err))
-      .finally(() => {
-        setLoading(false);
-        setRefreshing(false);
-      });
-  }, [token]);
-
-  useEffect(() => { load(); }, [load]);
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    load();
-  }, [load]);
-
-  if (loading && !data) return <LoadingSpinner />;
-
-  // Guard all calculations against null, undefined, and division by zero
-  const totalTargetManpower  = data?.totalTargetManpower || 0;
-  const totalCurrentManpower = data?.totalCurrentManpower || 0;
-  const staffedPct           = totalTargetManpower > 0 ? Math.min(100, Math.round((totalCurrentManpower / totalTargetManpower) * 100)) : 0;
-  const totalOutputToday     = (data?.totalOutputToday ?? 0).toLocaleString();
-  const activeBlockers       = Array.isArray(data?.activeBlockers) ? data.activeBlockers : [];
-  const departments          = Array.isArray(data?.departments) ? data.departments : [];
-
-  return (
-    <ScrollView
-      style={styles.screenScroll}
-      contentContainerStyle={styles.scrollContent}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#6366f1" colors={['#6366f1']} />}
-    >
-      <View style={styles.screenHeaderRow}>
-        <View>
-          <Text style={styles.screenHeader}>HR Command Center</Text>
-          <Text style={styles.screenSub}>Real-time monitoring across 10 departments</Text>
-        </View>
-        <TouchableOpacity onPress={onRefresh} style={styles.refreshBtn}>
-          <AppIcon name="refresh-outline" size={16} color="#818cf8" />
-        </TouchableOpacity>
-      </View>
-
-      {/* Top 4 KPI Cards */}
-      <View style={styles.kpiGrid}>
-        <View style={styles.kpiCard}>
-          <Text style={styles.kpiLabel}>Total Workforce</Text>
-          <Text style={styles.kpiVal}>
-            {totalCurrentManpower}{' '}
-            <Text style={{ fontSize: 13, color: '#94a3b8', fontWeight: 'normal' }}>/ {totalTargetManpower}</Text>
-          </Text>
-          <View style={styles.kpiProgressTrack}>
-            <View style={[styles.kpiProgressFill, { width: `${staffedPct}%` }]} />
-          </View>
-          <Text style={{ fontSize: 11, color: '#818cf8', marginTop: 4, fontWeight: '600' }}>{staffedPct}% Staffed</Text>
-        </View>
-
-        <View style={styles.kpiCard}>
-          <Text style={styles.kpiLabel}>Today's Output</Text>
-          <Text style={[styles.kpiVal, { color: '#34d399' }]}>{totalOutputToday}</Text>
-          <Text style={{ fontSize: 11, color: '#94a3b8', marginTop: 4 }}>units produced</Text>
-        </View>
-
-        <View style={styles.kpiCard}>
-          <Text style={styles.kpiLabel}>C26 Headcount</Text>
-          <Text style={[styles.kpiVal, { color: '#fbbf24' }]}>1,157</Text>
-          <Text style={{ fontSize: 11, color: '#fbbf24', marginTop: 4 }}>Planned positions</Text>
-        </View>
-
-        <View style={styles.kpiCard}>
-          <Text style={styles.kpiLabel}>Floor Blockers</Text>
-          <Text style={[styles.kpiVal, { color: activeBlockers.length > 0 ? '#f87171' : '#34d399' }]}>
-            {activeBlockers.length}
-          </Text>
-          <Text style={{ fontSize: 11, color: activeBlockers.length > 0 ? '#f87171' : '#94a3b8', marginTop: 4 }}>
-            {activeBlockers.length > 0 ? 'Needing HR action' : 'Zero bottlenecks'}
-          </Text>
-        </View>
-      </View>
-
-      {/* Floor Blockers Banner */}
-      {activeBlockers.length > 0 && (
-        <View style={styles.blockerBanner}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-            <AppIcon name="warning" size={16} color="#f87171" />
-            <Text style={styles.blockerTitle}>Active Floor Staffing Bottlenecks ({activeBlockers.length})</Text>
-          </View>
-          {activeBlockers.map(b => (
-            <View key={b.id || Math.random()} style={styles.blockerItem}>
-              <Text style={styles.blockerDept}>{b.deptName} — {b.reporter || 'Supervisor'}</Text>
-              <Text style={styles.blockerMsg}>{b.blocker}</Text>
-            </View>
-          ))}
-        </View>
-      )}
-
-      {/* 10 Departments Status List */}
-      <Text style={[styles.sectionTitle, { marginTop: 18 }]}>10 Departments Live Status</Text>
-      {departments.length === 0 ? (
-        <View style={styles.emptyCard}>
-          <Text style={styles.emptyText}>No department telemetry received yet.</Text>
-        </View>
-      ) : (
-        departments.map(dept => {
-          const latest = dept.workLogs?.[0];
-          const isDelayed = latest?.status === 'Delayed';
-          return (
-            <View key={dept.id} style={styles.deptCard}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
-                  <View style={styles.deptCodeBadge}>
-                    <Text style={styles.deptCodeText}>{dept.code}</Text>
-                  </View>
-                  <View>
-                    <Text style={styles.deptName}>{dept.name}</Text>
-                    <Text style={styles.deptHead}>{dept.head?.name || 'Head Assigned'}</Text>
-                  </View>
-                </View>
-                <View style={[styles.statusPill, { backgroundColor: isDelayed ? '#ef444420' : '#10b98120' }]}>
-                  <Text style={{ color: isDelayed ? '#f87171' : '#34d399', fontSize: 11, fontWeight: '700' }}>
-                    {latest?.status || 'Active'}
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles.deptMetricsRow}>
-                <Text style={styles.metricItem}>
-                  Staff: <Text style={{ color: '#fff', fontWeight: '700' }}>{dept.currentManpower || 0}/{dept.targetManpower || 0}</Text>
-                </Text>
-                <Text style={styles.metricItem}>
-                  Output: <Text style={{ color: '#34d399', fontWeight: '700' }}>{(latest?.actualOutput ?? '—')}</Text> units
-                </Text>
-              </View>
-            </View>
-          );
-        })
-      )}
-    </ScrollView>
-  );
-}
-
-// ----------------- C26 MANPOWER MATRIX VIEW -----------------
-function ManpowerMatrixView({ token }) {
-  const [data, setData]             = useState(null);
-  const [loading, setLoading]       = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [search, setSearch]         = useState('');
-
-  const load = useCallback(() => {
-    return apiRequest('/manpower-plan', 'GET', null, token)
-      .then(setData)
-      .catch(err => console.error('Matrix load error:', err))
-      .finally(() => {
-        setLoading(false);
-        setRefreshing(false);
-      });
-  }, [token]);
-
-  useEffect(() => { load(); }, [load]);
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    load();
-  }, [load]);
-
-  if (loading && !data) return <LoadingSpinner />;
-
-  const rows = Array.isArray(data?.rows) ? data.rows : [];
-  const filtered = rows.filter(r => {
-    if (!search.trim()) return true;
-    const q = search.toLowerCase();
-    return (r.position || '').toLowerCase().includes(q) ||
-           (r.dept || '').toLowerCase().includes(q) ||
-           (r.appointedNames || '').toLowerCase().includes(q) ||
-           (r.remarks || '').toLowerCase().includes(q);
-  });
-
-  return (
-    <View style={{ flex: 1 }}>
-      <View style={styles.matrixTopBar}>
-        <View style={styles.screenHeaderRow}>
-          <View>
-            <Text style={styles.screenHeader}>C26 Master Headcount</Text>
-            <Text style={styles.screenSub}>1,157 Planned Positions across 87 Profiles</Text>
-          </View>
-          <TouchableOpacity onPress={onRefresh} style={styles.refreshBtn}>
-            <AppIcon name="refresh-outline" size={16} color="#818cf8" />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.searchBox}>
-          <AppIcon name="search-outline" size={16} color="#64748b" />
-          <TextInput
-            value={search}
-            onChangeText={setSearch}
-            placeholder="Search role, dept, or candidate..."
-            placeholderTextColor="#64748b"
-            style={styles.searchInput}
-          />
-          {search.length > 0 && (
-            <TouchableOpacity onPress={() => setSearch('')}>
-              <AppIcon name="close-circle" size={16} color="#64748b" />
-            </TouchableOpacity>
-          )}
-        </View>
-      </View>
-
-      <ScrollView
-        style={styles.screenScroll}
-        contentContainerStyle={[styles.scrollContent, { paddingTop: 8 }]}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#6366f1" colors={['#6366f1']} />}
-      >
-        {filtered.length === 0 ? (
-          <View style={styles.emptyCard}>
-            <Text style={styles.emptyText}>No matching positions found.</Text>
-          </View>
-        ) : (
-          filtered.map(row => {
-            const isAppointed = row.status === 'appointed';
-            const isPending   = row.status === 'pending_doi';
-            return (
-              <View key={row.id} style={styles.matrixCard}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <View style={{ flex: 1, paddingRight: 8 }}>
-                    <Text style={styles.matrixDept}>{row.dept}</Text>
-                    <Text style={styles.matrixPos}>{row.position}</Text>
-                  </View>
-                  <View style={styles.matrixCountBadge}>
-                    <Text style={styles.matrixCountText}>{row.plannedTotal || 0}</Text>
-                    <Text style={{ fontSize: 9, color: '#94a3b8', fontWeight: '700' }}>PLANNED</Text>
-                  </View>
-                </View>
-
-                {/* Monthly breakdown pills */}
-                <View style={styles.matrixMonthsRow}>
-                  {row.sep > 0 && <Text style={styles.monthPill}>Sep: {row.sep}</Text>}
-                  {row.oct > 0 && <Text style={[styles.monthPill, styles.monthPillHighlight]}>Oct: {row.oct}</Text>}
-                  {row.nov > 0 && <Text style={styles.monthPill}>Nov: {row.nov}</Text>}
-                  {row.dec > 0 && <Text style={styles.monthPill}>Dec: {row.dec}</Text>}
-                  {row.jan > 0 && <Text style={styles.monthPill}>Jan: {row.jan}</Text>}
-                  {row.feb > 0 && <Text style={styles.monthPill}>Feb: {row.feb}</Text>}
-                  {row.mar > 0 && <Text style={[styles.monthPill, { borderColor: '#3b82f640', color: '#60a5fa' }]}>Mar: {row.mar}</Text>}
-                </View>
-
-                {/* Status & Appointed names */}
-                <View style={{ marginTop: 8 }}>
-                  {isAppointed && (
-                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-                      <AppIcon name="checkmark-circle" size={13} color="#34d399" />
-                      <Text style={{ color: '#34d399', fontSize: 11, fontWeight: '700' }}>
-                        Appointed: {row.appointedNames}
-                      </Text>
-                    </View>
-                  )}
-                  {isPending && (
-                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-                      <AppIcon name="time-outline" size={13} color="#fbbf24" />
-                      <Text style={{ color: '#fbbf24', fontSize: 11, fontWeight: '700' }}>
-                        Pending Johnny DOI
-                      </Text>
-                    </View>
-                  )}
-                  {row.remarks ? (
-                    <Text style={{ color: '#94a3b8', fontSize: 11, marginTop: 4 }}>{row.remarks}</Text>
-                  ) : null}
-                </View>
-              </View>
-            );
-          })
-        )}
-      </ScrollView>
-    </View>
-  );
-}
-
-// ----------------- DEPT HEAD FLOOR TERMINAL -----------------
-function DeptHeadFloorView({ user, token }) {
-  const [targetOutput, setTarget]   = useState('4500');
-  const [actualOutput, setActual]   = useState('4350');
-  const [staffPresent, setStaff]    = useState('28');
-  const [blockers, setBlockers]     = useState('');
-  const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess]       = useState(false);
-
-  async function submitReport() {
-    if (!user.departmentId) {
-      Alert.alert('Notice', 'No department assigned to this user profile');
-      return;
-    }
-    setSubmitting(true);
-    try {
-      await apiRequest('/worklogs', 'POST', {
-        departmentId: user.departmentId,
-        shift: 'Day Shift',
-        targetOutput: parseInt(targetOutput, 10) || 0,
-        actualOutput: parseInt(actualOutput, 10) || 0,
-        manpowerPresent: parseInt(staffPresent, 10) || 0,
-        manpowerRequired: (parseInt(staffPresent, 10) || 0) + 2,
-        status: blockers.trim().length > 0 ? 'Delayed' : 'On Schedule',
-        blockers,
-      }, token);
-      setSuccess(true);
-      setTimeout(() => setSuccess(false), 5000);
-      setBlockers('');
-    } catch (e) {
-      Alert.alert('Error', e.message);
-    } finally {
-      setSubmitting(false);
-    }
-  }
-
-  return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      style={{ flex: 1 }}
-    >
-      <ScrollView
-        style={styles.screenScroll}
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
-      >
-        <Text style={styles.screenHeader}>Department Floor Terminal</Text>
-        <Text style={styles.screenSub}>
-          Logged in: {user.name} ({user.department?.name || 'Department Floor'})
-        </Text>
-
-        {success && (
-          <View style={[styles.realtimeBanner, { marginVertical: 10, borderRadius: 10 }]}>
-            <AppIcon name="checkmark-circle" size={16} color="#fff" />
-            <Text style={styles.realtimeBannerText}>Shift report broadcast live to HR Command Center!</Text>
-          </View>
-        )}
-
-        <View style={[styles.card, { marginTop: 12 }]}>
-          <Text style={styles.cardTitle}>Submit Shift Output to HR</Text>
-
-          <Text style={styles.fieldLabel}>Target Output (Units)</Text>
-          <TextInput
-            value={targetOutput}
-            onChangeText={setTarget}
-            keyboardType="numeric"
-            style={styles.input}
-          />
-
-          <Text style={styles.fieldLabel}>Actual Completed (Units)</Text>
-          <TextInput
-            value={actualOutput}
-            onChangeText={setActual}
-            keyboardType="numeric"
-            style={styles.input}
-          />
-
-          <Text style={styles.fieldLabel}>Workers Present on Floor Today</Text>
-          <TextInput
-            value={staffPresent}
-            onChangeText={setStaff}
-            keyboardType="numeric"
-            style={styles.input}
-          />
-
-          <Text style={styles.fieldLabel}>Report Floor Blocker / Staff Shortage (Optional)</Text>
-          <TextInput
-            value={blockers}
-            onChangeText={setBlockers}
-            placeholder="e.g. Need 4 additional stitchers from HR..."
-            placeholderTextColor="#64748b"
-            multiline
-            numberOfLines={3}
-            style={[styles.input, { height: 75, textAlignVertical: 'top' }]}
-          />
-
-          <TouchableOpacity
-            onPress={submitReport}
-            disabled={submitting}
-            style={[styles.loginSubmitBtn, { marginTop: 16 }]}
-          >
-            {submitting ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-                <AppIcon name="paper-plane-outline" size={16} color="#fff" />
-                <Text style={styles.btnText}>Send Live Report to HR</Text>
-              </View>
-            )}
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
-  );
-}
-
-// ----------------- ONBOARDING VIEW -----------------
-function OnboardingView({ token }) {
-  const [candidates, setCandidates] = useState([]);
-  const [loading, setLoading]       = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-
-  const load = useCallback(() => {
-    return apiRequest('/recruitment/candidates', 'GET', null, token)
-      .then(res => setCandidates(Array.isArray(res) ? res : []))
-      .catch(err => console.error('Onboarding load error:', err))
-      .finally(() => {
-        setLoading(false);
-        setRefreshing(false);
-      });
-  }, [token]);
-
-  useEffect(() => { load(); }, [load]);
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    load();
-  }, [load]);
-
-  async function toggleStep(id, field, currentVal) {
-    try {
-      await apiRequest(`/recruitment/candidates/${id}/onboarding`, 'PATCH', {
-        [field]: !currentVal,
-      }, token);
-      load();
-    } catch (e) {
-      Alert.alert('Error', e.message);
-    }
-  }
-
-  if (loading && candidates.length === 0) return <LoadingSpinner />;
-
-  return (
-    <ScrollView
-      style={styles.screenScroll}
-      contentContainerStyle={styles.scrollContent}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#6366f1" colors={['#6366f1']} />}
-    >
-      <View style={styles.screenHeaderRow}>
-        <View>
-          <Text style={styles.screenHeader}>Onboarding Checklist</Text>
-          <Text style={styles.screenSub}>5-point verification for factory recruits</Text>
-        </View>
-        <TouchableOpacity onPress={onRefresh} style={styles.refreshBtn}>
-          <AppIcon name="refresh-outline" size={16} color="#818cf8" />
-        </TouchableOpacity>
-      </View>
-
-      {candidates.length === 0 ? (
-        <View style={styles.emptyCard}>
-          <Text style={styles.emptyText}>No recruits currently in onboarding pipeline.</Text>
-        </View>
-      ) : (
-        candidates.map(cand => (
-          <View key={cand.id} style={styles.card}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-              <View>
-                <Text style={styles.cardTitle}>{cand.name}</Text>
-                <Text style={{ color: '#818cf8', fontSize: 12, marginTop: 2 }}>{cand.appliedRole}</Text>
-              </View>
-              <View style={[styles.statusPill, { backgroundColor: '#4f46e520' }]}>
-                <Text style={{ color: '#818cf8', fontSize: 12, fontWeight: '700' }}>
-                  {cand.onboardingProgress || 0}%
-                </Text>
-              </View>
-            </View>
-
-            {/* 5 checklist rows */}
-            <View style={{ marginTop: 12, gap: 8 }}>
-              <CheckRow
-                label="1. Doc Verification (ID & Certs)"
-                checked={cand.docVerification}
-                onPress={() => toggleStep(cand.id, 'docVerification', cand.docVerification)}
-              />
-              <CheckRow
-                label="2. Background Check (BGV)"
-                checked={cand.bgvCheck}
-                onPress={() => toggleStep(cand.id, 'bgvCheck', cand.bgvCheck)}
-              />
-              <CheckRow
-                label="3. Safety & PPE Induction"
-                checked={cand.safetyInductionDone}
-                onPress={() => toggleStep(cand.id, 'safetyInductionDone', cand.safetyInductionDone)}
-              />
-              <CheckRow
-                label="4. Workstation & Floor Badge"
-                checked={cand.workstationAssigned}
-                onPress={() => toggleStep(cand.id, 'workstationAssigned', cand.workstationAssigned)}
-              />
-              <CheckRow
-                label="5. Department Mentor Assigned"
-                checked={cand.mentorAssigned}
-                onPress={() => toggleStep(cand.id, 'mentorAssigned', cand.mentorAssigned)}
-              />
-            </View>
-          </View>
-        ))
-      )}
-    </ScrollView>
-  );
-}
-
-function CheckRow({ label, checked, onPress }) {
-  return (
-    <TouchableOpacity onPress={onPress} style={styles.checkRow}>
-      <View style={[styles.checkBox, checked && { backgroundColor: '#10b981', borderColor: '#10b981' }]}>
-        {checked && <AppIcon name="checkmark" size={14} color="#fff" />}
-      </View>
-      <Text style={[styles.checkLabel, checked && { color: '#e2e8f0', fontWeight: '600' }]}>{label}</Text>
-    </TouchableOpacity>
-  );
-}
-
-// ----------------- DIRECTIVES VIEW -----------------
-function DirectivesView({ user, token }) {
-  const [directives, setDirs]       = useState([]);
-  const [loading, setLoading]       = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [title, setTitle]           = useState('');
-  const [content, setContent]       = useState('');
-  const [sending, setSending]       = useState(false);
-
-  const load = useCallback(() => {
-    return apiRequest('/directives', 'GET', null, token)
-      .then(res => setDirs(Array.isArray(res) ? res : []))
-      .catch(err => console.error('Directives load error:', err))
-      .finally(() => {
-        setLoading(false);
-        setRefreshing(false);
-      });
-  }, [token]);
-
-  useEffect(() => { load(); }, [load]);
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    load();
-  }, [load]);
-
-  async function postDirective() {
-    if (!title.trim() || !content.trim()) return;
-    setSending(true);
-    try {
-      await apiRequest('/directives', 'POST', {
-        title,
-        content,
-        category: 'Recruitment Milestone',
-        priority: 'High',
-      }, token);
-      setTitle('');
-      setContent('');
-      load();
-    } catch (e) {
-      Alert.alert('Error', e.message);
-    } finally {
-      setSending(false);
-    }
-  }
-
-  if (loading && directives.length === 0) return <LoadingSpinner />;
-
-  const isHr = user.role === 'hr_admin' || user.role === 'admin';
-
-  return (
-    <ScrollView
-      style={styles.screenScroll}
-      contentContainerStyle={styles.scrollContent}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#6366f1" colors={['#6366f1']} />}
-    >
-      <View style={styles.screenHeaderRow}>
-        <View>
-          <Text style={styles.screenHeader}>HR Directives & Notices</Text>
-          <Text style={styles.screenSub}>Plant broadcasts & workforce directives</Text>
-        </View>
-        <TouchableOpacity onPress={onRefresh} style={styles.refreshBtn}>
-          <AppIcon name="refresh-outline" size={16} color="#818cf8" />
-        </TouchableOpacity>
-      </View>
-
-      {/* HR Publish Box */}
-      {isHr && (
-        <View style={[styles.card, { marginTop: 12 }]}>
-          <Text style={styles.cardTitle}>Broadcast New Directive</Text>
-          <TextInput
-            value={title}
-            onChangeText={setTitle}
-            placeholder="Directive title..."
-            placeholderTextColor="#64748b"
-            style={styles.input}
-          />
-          <TextInput
-            value={content}
-            onChangeText={setContent}
-            placeholder="Details to broadcast across plant..."
-            placeholderTextColor="#64748b"
-            multiline
-            numberOfLines={2}
-            style={[styles.input, { height: 65, textAlignVertical: 'top' }]}
-          />
-          <TouchableOpacity onPress={postDirective} disabled={sending} style={styles.loginSubmitBtn}>
-            {sending ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-                <AppIcon name="megaphone-outline" size={16} color="#fff" />
-                <Text style={styles.btnText}>Broadcast to Plant</Text>
-              </View>
-            )}
-          </TouchableOpacity>
-        </View>
-      )}
-
-      {/* List */}
-      <View style={{ marginTop: 12, gap: 10 }}>
-        {directives.length === 0 ? (
-          <View style={styles.emptyCard}>
-            <Text style={styles.emptyText}>No plant directives issued yet.</Text>
-          </View>
-        ) : (
-          directives.map(d => (
-            <View key={d.id} style={styles.card}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                <View style={styles.directiveCategoryBadge}>
-                  <Text style={styles.directiveCategoryText}>{d.category}</Text>
-                </View>
-                <Text style={{ color: '#64748b', fontSize: 11 }}>
-                  {new Date(d.createdAt).toLocaleDateString()}
-                </Text>
-              </View>
-              <Text style={[styles.cardTitle, { marginTop: 8 }]}>{d.title}</Text>
-              <Text style={{ color: '#cbd5e1', fontSize: 13, marginTop: 4, lineHeight: 18 }}>{d.content}</Text>
-              <Text style={{ color: '#94a3b8', fontSize: 11, marginTop: 10 }}>Issued by {d.author?.name || 'HR Team'}</Text>
-            </View>
-          ))
-        )}
-      </View>
-    </ScrollView>
-  );
-}
 
 function TabItem({ label, active, onPress, icon, activeIcon }) {
   return (
@@ -1152,24 +617,16 @@ function TabItem({ label, active, onPress, icon, activeIcon }) {
   );
 }
 
-function LoadingSpinner() {
-  return (
-    <View style={styles.loadingContainer}>
-      <ActivityIndicator size="large" color="#6366f1" />
-      <Text style={{ color: '#94a3b8', fontSize: 12, marginTop: 12 }}>Loading factory data...</Text>
-    </View>
-  );
-}
 
 // ----------------- STYLES -----------------
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#090d16',
+    backgroundColor: '#020617',
   },
   mainLayout: {
     flex: 1,
-    backgroundColor: '#090d16',
+    backgroundColor: '#020617',
   },
   screenContainer: {
     flex: 1,
@@ -1366,7 +823,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   blockerItem: {
-    backgroundColor: '#090d16',
+    backgroundColor: '#020617',
     borderRadius: 8,
     padding: 9,
     marginTop: 6,
@@ -1441,7 +898,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 16,
     paddingBottom: 8,
-    backgroundColor: '#090d16',
+    backgroundColor: '#020617',
   },
   searchBox: {
     flexDirection: 'row',
@@ -1841,4 +1298,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  drawerOverlay: { flex: 1, flexDirection: 'row', backgroundColor: '#000000a6' },
+  drawer: { width: 290, maxWidth: '82%', backgroundColor: '#0f172a', borderRightWidth: 1, borderRightColor: '#1e293b', paddingHorizontal: 14, paddingBottom: 16 },
+  drawerBrand: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 22, paddingHorizontal: 4 },
+  drawerLogo: { width: 38, height: 38, borderRadius: 12, backgroundColor: '#4f46e5', alignItems: 'center', justifyContent: 'center' },
+  drawerBrandTitle: { color: '#fff', fontWeight: '900', fontSize: 15 },
+  drawerBrandSub: { color: '#818cf8', fontSize: 10, fontWeight: '800', letterSpacing: 0.6, marginTop: 1 },
+  drawerItem: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 12, paddingVertical: 12, borderRadius: 12 },
+  drawerItemActive: { backgroundColor: '#4f46e5' },
+  drawerSection: { color: '#818cf8cc', fontSize: 10, fontWeight: '900', letterSpacing: 0.8, marginTop: 14, marginBottom: 2, paddingHorizontal: 12 },
+  drawerItemText: { color: '#94a3b8', fontSize: 13.5, fontWeight: '700', flex: 1 },
+  drawerNew: { color: '#6ee7b7', fontSize: 9, fontWeight: '900', backgroundColor: '#10b98126', paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6, overflow: 'hidden' },
+  drawerFooter: { borderTopWidth: 1, borderTopColor: '#1e293b', paddingTop: 12, marginTop: 8 },
+  drawerUser: { flexDirection: 'row', alignItems: 'center', gap: 10, padding: 8, borderRadius: 12, backgroundColor: '#1e293b66', borderWidth: 1, borderColor: '#1e293b', marginBottom: 8 },
+  drawerAvatar: { width: 34, height: 34, borderRadius: 17, alignItems: 'center', justifyContent: 'center' },
+  drawerLogout: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 10, paddingVertical: 10, borderRadius: 10, backgroundColor: '#ef44441a' },
 });

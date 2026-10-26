@@ -719,7 +719,7 @@ const s = StyleSheet.create({
   retryBtn: { backgroundColor: '#4f46e5', paddingHorizontal: 18, paddingVertical: 9, borderRadius: 10 },
   retryText: { color: '#fff', fontWeight: '700' },
 
-  topBar: { paddingHorizontal: 16, paddingTop: 14, backgroundColor: '#090d16' },
+  topBar: { paddingHorizontal: 16, paddingTop: 14, backgroundColor: '#020617' },
   headerRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 12 },
   title: { color: '#fff', fontSize: 20, fontWeight: '900' },
   sub: { color: '#94a3b8', fontSize: 12, marginTop: 2 },

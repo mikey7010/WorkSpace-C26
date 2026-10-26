@@ -53,7 +53,7 @@ export default function TaskBoard() {
   const [saving, setSaving]     = useState(false);
 
   const fetchTasks = useCallback(() => api.get('/tasks').then(r => setTasks(r.data)), []);
-  useEffect(() => { fetchTasks(); api.get('/users').then(r => setUsers(r.data.filter(u => u.role === 'member'))); }, [fetchTasks]);
+  useEffect(() => { fetchTasks(); api.get('/users').then(r => setUsers(r.data.filter(u => u.role !== 'hr_admin' && u.role !== 'admin'))); }, [fetchTasks]);
 
   async function onDragEnd({ source, destination, draggableId }) {
     if (!destination || source.droppableId === destination.droppableId) return;

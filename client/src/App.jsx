@@ -18,6 +18,11 @@ import DeptDashboard from './pages/dept/DeptDashboard';
 // Task Board
 import TaskBoard from './pages/admin/TaskBoard';
 
+// Recruitment Management
+import WorkPlan from './pages/recruitment/WorkPlan';
+import RecruitmentSummary from './pages/recruitment/Summary';
+import CandidateTracking from './pages/recruitment/Candidates';
+
 function PrivateRoute({ children, hrOnly = false }) {
   const { user, loading } = useAuth();
   if (loading) {
@@ -61,6 +66,11 @@ export default function App() {
             <Route path="/onboarding"     element={<PrivateRoute><OnboardingTracker /></PrivateRoute>} />
             <Route path="/directives"     element={<PrivateRoute><HrDirectives /></PrivateRoute>} />
             <Route path="/tasks"          element={<PrivateRoute><TaskBoard /></PrivateRoute>} />
+
+            {/* Recruitment Management (HR + HOD; permissions enforced by the API) */}
+            <Route path="/recruitment/plan"       element={<PrivateRoute><WorkPlan /></PrivateRoute>} />
+            <Route path="/recruitment/summary"    element={<PrivateRoute><RecruitmentSummary /></PrivateRoute>} />
+            <Route path="/recruitment/candidates" element={<PrivateRoute><CandidateTracking /></PrivateRoute>} />
 
             {/* Department Head Route */}
             <Route path="/dept-dashboard" element={<PrivateRoute><DeptDashboard /></PrivateRoute>} />
