@@ -1,0 +1,4335 @@
+[
+ {
+  "dept": "Assembly",
+  "position": "Duty Manager",
+  "totalNeed": 1,
+  "sortOrder": 11,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Assembly",
+  "position": "Sr. Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 12,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 1,
+    "remarks": "Appointed- 1st wave - Tamil selvan",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 1,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Assembly",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 13,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Assembly",
+  "position": "Sr. Line Leader",
+  "totalNeed": 2,
+  "sortOrder": 14,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 1,
+    "remarks": "Appointed - 1st Wave Manogar",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 1,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Assembly",
+  "position": "Line Leader",
+  "totalNeed": 6,
+  "sortOrder": 15,
+  "months": {
+   "2026-10": {
+    "hodCount": 2,
+    "hrCount": 2,
+    "remarks": "Appointed 2 - 1st Wave - Mohan Raj 2 .Thatchan murthy",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 2,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Assembly",
+  "position": "Assistant Engineer",
+  "totalNeed": 5,
+  "sortOrder": 16,
+  "months": {
+   "2026-12": {
+    "hodCount": 3,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Assembly",
+  "position": "High Skilled Operator",
+  "totalNeed": 2,
+  "sortOrder": 17,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Assembly",
+  "position": "Unskilled Operator",
+  "totalNeed": 156,
+  "sortOrder": 18,
+  "months": {
+   "2026-12": {
+    "hodCount": 80,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 76,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Cutting/Stitching (C2B)",
+  "position": "Sr. Line Leader",
+  "totalNeed": 2,
+  "sortOrder": 19,
+  "months": {
+   "2026-10": {
+    "hodCount": 2,
+    "hrCount": 2,
+    "remarks": "Appointed 2 -1st wave - Rajasekar 2 - Sarath Kumar",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 2,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Cutting/Stitching (C2B)",
+  "position": "Line Leader",
+  "totalNeed": 4,
+  "sortOrder": 20,
+  "months": {
+   "2026-10": {
+    "hodCount": 3,
+    "hrCount": 3,
+    "remarks": "Appointed 3 - 1ST WAVE - 1 Jagan Kumar, 2. Sathish kumar 3. Sathyamurthy",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 3,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Cutting/Stitching (C2B)",
+  "position": "Unskilled Operator",
+  "totalNeed": 220,
+  "sortOrder": 21,
+  "months": {
+   "2026-12": {
+    "hodCount": 60,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 60,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 100,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Auto Cutting /Printing/HF//No Sew (C2B)(Logistics)",
+  "position": "Sr. Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 22,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Auto Cutting /Printing/HF//No Sew (C2B)(Logistics)",
+  "position": "Sr. Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 23,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Auto Cutting /Printing/HF//No Sew (C2B)(Logistics)",
+  "position": "Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 24,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Auto Cutting /Printing/HF//No Sew (C2B)(Logistics)",
+  "position": "Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 25,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Auto Cutting /Printing/HF//No Sew (C2B)(Logistics)",
+  "position": "High Skilled Operator",
+  "totalNeed": 1,
+  "sortOrder": 26,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Auto Cutting /Printing/HF//No Sew (C2B)(Logistics)",
+  "position": "Unskilled Operator",
+  "totalNeed": 3,
+  "sortOrder": 27,
+  "months": {
+   "2027-03": {
+    "hodCount": 3,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Auto Cutting/Printing",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 28,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Auto Cutting /Printing/HF//No Sew (C2B)",
+  "position": "Sr. Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 29,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Auto Cutting /Printing/HF//No Sew (C2B)",
+  "position": "Line Leader",
+  "totalNeed": 2,
+  "sortOrder": 30,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Auto Cutting /Printing/HF//No Sew (C2B)",
+  "position": "Unskilled Operator",
+  "totalNeed": 13,
+  "sortOrder": 31,
+  "months": {
+   "2027-03": {
+    "hodCount": 8,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 5,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Printing",
+  "position": "Sr. Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 32,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Printing",
+  "position": "Line Leader",
+  "totalNeed": 2,
+  "sortOrder": 33,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Printing",
+  "position": "Assistant Engineer",
+  "totalNeed": 1,
+  "sortOrder": 34,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Printing",
+  "position": "Unskilled Operator",
+  "totalNeed": 18,
+  "sortOrder": 35,
+  "months": {
+   "2027-03": {
+    "hodCount": 10,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 8,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "HF//No Sew",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 36,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "HF//No Sew",
+  "position": "Sr. Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 37,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "HF",
+  "position": "Unskilled Operator",
+  "totalNeed": 8,
+  "sortOrder": 38,
+  "months": {
+   "2027-03": {
+    "hodCount": 4,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 4,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "No Sew",
+  "position": "Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 39,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "No Sew",
+  "position": "Unskilled Operator",
+  "totalNeed": 45,
+  "sortOrder": 40,
+  "months": {
+   "2027-03": {
+    "hodCount": 25,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 20,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Embroidery/Logistics (C2B)",
+  "position": "Sr. Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 41,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Embroidery (C2B)",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 42,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Embroidery (C2B)",
+  "position": "Sr. Line Leader",
+  "totalNeed": 3,
+  "sortOrder": 43,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Embroidery (C2B)",
+  "position": "Line Leader",
+  "totalNeed": 3,
+  "sortOrder": 44,
+  "months": {
+   "2027-03": {
+    "hodCount": 3,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Embroidery (C2B)",
+  "position": "Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 45,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Embroidery (C2B)",
+  "position": "High Skilled Operator",
+  "totalNeed": 3,
+  "sortOrder": 46,
+  "months": {
+   "2027-03": {
+    "hodCount": 3,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Embroidery (C2B)",
+  "position": "Unskilled Operator",
+  "totalNeed": 109,
+  "sortOrder": 47,
+  "months": {
+   "2027-03": {
+    "hodCount": 60,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 49,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Embroidery(Logistics) (C2B)",
+  "position": "Sr. Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 48,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Embroidery(Logistics) (C2B)",
+  "position": "Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 49,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Embroidery(Logistics) (C2B)",
+  "position": "Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 50,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Embroidery(Logistics) (C2B)",
+  "position": "High Skilled Operator",
+  "totalNeed": 3,
+  "sortOrder": 51,
+  "months": {
+   "2027-03": {
+    "hodCount": 3,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Embroidery(Logistics) (C2B)",
+  "position": "Unskilled Operator",
+  "totalNeed": 3,
+  "sortOrder": 52,
+  "months": {
+   "2027-03": {
+    "hodCount": 3,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Stockfitting (spray paint/Degreasing & UV Treatment/Sole Assembly/Logistics) (C2B)",
+  "position": "Sr. Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 53,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Stockfitting (spray paint/Degreasing & UV Treatment/Sole Assembly/Logistics) (C2B)",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 54,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Stockfitting (spray paint)",
+  "position": "Sr. Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 55,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Stockfitting (spray paint)",
+  "position": "Line Leader",
+  "totalNeed": 5,
+  "sortOrder": 56,
+  "months": {
+   "2027-03": {
+    "hodCount": 3,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Stockfitting (spray paint)",
+  "position": "Unskilled Operator",
+  "totalNeed": 95,
+  "sortOrder": 57,
+  "months": {
+   "2027-03": {
+    "hodCount": 50,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 45,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Stockfitting (Degreasing & UV Treatment)",
+  "position": "Sr. Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 58,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Stockfitting (Degreasing & UV Treatment)",
+  "position": "Line Leader",
+  "totalNeed": 2,
+  "sortOrder": 59,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Stockfitting (Degreasing & UV Treatment)",
+  "position": "Unskilled Operator",
+  "totalNeed": 32,
+  "sortOrder": 60,
+  "months": {
+   "2027-03": {
+    "hodCount": 20,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 12,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Stockfitting (Sole Assembly)",
+  "position": "Sr. Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 61,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Stockfitting (Sole Assembly)",
+  "position": "Line Leader",
+  "totalNeed": 2,
+  "sortOrder": 62,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Stockfitting (Sole Assembly)",
+  "position": "Unskilled Operator",
+  "totalNeed": 80,
+  "sortOrder": 63,
+  "months": {
+   "2027-03": {
+    "hodCount": 50,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 30,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Stockfitting (Logistics)",
+  "position": "Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 64,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Stockfitting (Logistics)",
+  "position": "High Skilled Operator",
+  "totalNeed": 2,
+  "sortOrder": 65,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Stockfitting (Logistics)",
+  "position": "Unskilled Operator",
+  "totalNeed": 4,
+  "sortOrder": 66,
+  "months": {
+   "2027-03": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RB(Material Mixing/Material Prep/Hot pressing/Refinement) (C2B)",
+  "position": "Sr. Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 67,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RB(Material Mixing/Material Prep/Hot pressing/Refinement) (C2B)",
+  "position": "Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 68,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RB(Material Mixing/Material Prep/Hot pressing/Refinement) (C2B)",
+  "position": "High Skilled Operator",
+  "totalNeed": 1,
+  "sortOrder": 69,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RB(Material Mixing/Material Prep) (C2B)",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 70,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RB(Material Mixing/Material Prep) (C2B)",
+  "position": "Sr. Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 71,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RB(Material Mixing/Material Prep) (C2B)",
+  "position": "Line Leader",
+  "totalNeed": 2,
+  "sortOrder": 72,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-02": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RB(Material Mixing/Material Prep) (C2B)",
+  "position": "Engineer",
+  "totalNeed": 1,
+  "sortOrder": 73,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RB(Material Mixing/Material Prep) (C2B)",
+  "position": "Assistant Engineer",
+  "totalNeed": 1,
+  "sortOrder": 74,
+  "months": {
+   "2027-02": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RB(Material Mixing/Material Prep) (C2B)",
+  "position": "Unskilled Operator",
+  "totalNeed": 14,
+  "sortOrder": 75,
+  "months": {
+   "2027-02": {
+    "hodCount": 4,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 6,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 4,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RB(Hot pressing/Refinement) (C2B)",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 76,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RB(Hot pressing/Refinement) (C2B)",
+  "position": "Sr. Line Leader",
+  "totalNeed": 2,
+  "sortOrder": 77,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RB(Hot pressing/Refinement) (C2B)",
+  "position": "Line Leader",
+  "totalNeed": 4,
+  "sortOrder": 78,
+  "months": {
+   "2027-03": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RB(Hot pressing/Refinement) (C2B)",
+  "position": "Unskilled Operator",
+  "totalNeed": 46,
+  "sortOrder": 79,
+  "months": {
+   "2027-03": {
+    "hodCount": 26,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 20,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IP(Pelleting /Color Matching / Material Preparatio/Injection)(C2B)",
+  "position": "Sr. Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 80,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IP(Pelleting /Color Matching / Material Preparatio/Injection)(C2B)",
+  "position": "Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 81,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IP(Pelleting /Color Matching / Material Preparatio/Injection)(C2B)",
+  "position": "High Skilled Operator",
+  "totalNeed": 1,
+  "sortOrder": 82,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IP(Pelleting /Color Matching / Material Preparation)",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 83,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IP(Pelleting /Color Matching / Material Preparation)",
+  "position": "Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 84,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IP(Pelleting /Color Matching / Material Preparation)",
+  "position": "Engineer",
+  "totalNeed": 1,
+  "sortOrder": 85,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IP(Pelleting /Color Matching / Material Preparation)",
+  "position": "Assistant Engineer",
+  "totalNeed": 3,
+  "sortOrder": 86,
+  "months": {
+   "2027-03": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IP(Pelleting /Color Matching / Material Preparation)",
+  "position": "Unskilled Operator",
+  "totalNeed": 7,
+  "sortOrder": 87,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-02": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 5,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IP(Injection)",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 88,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IP(Injection)",
+  "position": "Sr. Line Leader",
+  "totalNeed": 3,
+  "sortOrder": 89,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IP(Injection)",
+  "position": "Line Leader",
+  "totalNeed": 6,
+  "sortOrder": 90,
+  "months": {
+   "2027-02": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 3,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IP(Injection)",
+  "position": "Unskilled Operator",
+  "totalNeed": 110,
+  "sortOrder": 91,
+  "months": {
+   "2027-03": {
+    "hodCount": 60,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 50,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "GAP Regional Office",
+  "position": "Sr Manager(Johnny)",
+  "totalNeed": 1,
+  "sortOrder": 92,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "GAP Regional Office",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 3,
+  "sortOrder": 93,
+  "months": {
+   "2026-10": {
+    "hodCount": 3,
+    "hrCount": 0,
+    "remarks": "Need Johnny DOJ OF Candidate- 17.10.2026- Not now - Johnny will give date later",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "GAP Regional Office",
+  "position": "Executive Assistant",
+  "totalNeed": 4,
+  "sortOrder": 94,
+  "months": {
+   "2026-10": {
+    "hodCount": 4,
+    "hrCount": 0,
+    "remarks": "Need Johnny DOJ OF Candidate- 17.10.2026- Not now - Johnny will give date later",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Sourcing/Production Planning /IE/LEAN",
+  "position": "Manager(Ryan)",
+  "totalNeed": 1,
+  "sortOrder": 95,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Production Planning /IE/LEAN",
+  "position": "Sr. Supervisor( Schumi )",
+  "totalNeed": 1,
+  "sortOrder": 96,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Sourcing",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 97,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Sourcing",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 2,
+  "sortOrder": 98,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Sourcing",
+  "position": "Executive Assistant",
+  "totalNeed": 2,
+  "sortOrder": 99,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Sourcing",
+  "position": "General Staff",
+  "totalNeed": 4,
+  "sortOrder": 100,
+  "months": {
+   "2026-12": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Production Planning",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 101,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Production Planning",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 2,
+  "sortOrder": 102,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Production Planning",
+  "position": "Executive Assistant",
+  "totalNeed": 3,
+  "sortOrder": 103,
+  "months": {
+   "2026-12": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Production Planning",
+  "position": "General Staff",
+  "totalNeed": 3,
+  "sortOrder": 104,
+  "months": {
+   "2026-12": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Production Planning",
+  "position": "Unskilled Operator",
+  "totalNeed": 5,
+  "sortOrder": 105,
+  "months": {
+   "2026-12": {
+    "hodCount": 3,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IE/LEAN",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 106,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IE/LEAN",
+  "position": "Executive Assistant",
+  "totalNeed": 2,
+  "sortOrder": 107,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Product Security",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 108,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Product Security",
+  "position": "Executive Assistant",
+  "totalNeed": 2,
+  "sortOrder": 109,
+  "months": {
+   "2026-10": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Purchasing",
+  "position": "Manager(Md. Imroz)",
+  "totalNeed": 1,
+  "sortOrder": 110,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Purchasing",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 111,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 1,
+    "remarks": "Appointed - Santhana Krishnan 1st wave",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 1,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Purchasing",
+  "position": "Executive Assistant",
+  "totalNeed": 2,
+  "sortOrder": 112,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 1,
+    "remarks": "Appointed -Abbas 1st wave",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 1,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Purchasing",
+  "position": "General Staff",
+  "totalNeed": 2,
+  "sortOrder": 113,
+  "months": {
+   "2027-03": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IT",
+  "position": "Manager(Bill)",
+  "totalNeed": 1,
+  "sortOrder": 114,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IT",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 115,
+  "months": {
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "Appointed - Shathis S Supervisor",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "IT",
+  "position": "Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 116,
+  "months": {
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "Appointed - Srinivasan",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "MES",
+  "position": "Manager(Bill)",
+  "totalNeed": 1,
+  "sortOrder": 117,
+  "months": {
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "To be discussed with HOD",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "MES",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 118,
+  "months": {
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "To be discussed with HOD",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "MES",
+  "position": "Executive Assistant",
+  "totalNeed": 3,
+  "sortOrder": 119,
+  "months": {
+   "2026-11": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": "To be discussed with HOD",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "QC",
+  "position": "Manager(Tulip)",
+  "totalNeed": 1,
+  "sortOrder": 120,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "QC",
+  "position": "Sr. Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 121,
+  "months": {
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "QC",
+  "position": "Supervisor",
+  "totalNeed": 2,
+  "sortOrder": 122,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 1,
+    "remarks": "sourcing",
+    "sourcing": 1,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "To be discussed with HOD",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "QC",
+  "position": "Sr. Line Leader",
+  "totalNeed": 5,
+  "sortOrder": 123,
+  "months": {
+   "2026-10": {
+    "hodCount": 2,
+    "hrCount": 1,
+    "remarks": "Dillip Kumar S sr line leader 1ST WAVE",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 1,
+    "joined": 0
+   },
+   "2026-11": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "QC",
+  "position": "Line Leader/Assistant",
+  "totalNeed": 7,
+  "sortOrder": 124,
+  "months": {
+   "2026-10": {
+    "hodCount": 2,
+    "hrCount": 1,
+    "remarks": "Venkatesh K Line leader 1st wave",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 1,
+    "joined": 0
+   },
+   "2026-11": {
+    "hodCount": 3,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "QC",
+  "position": "General",
+  "totalNeed": 3,
+  "sortOrder": 125,
+  "months": {
+   "2026-11": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "QC",
+  "position": "Assistant Engineer",
+  "totalNeed": 16,
+  "sortOrder": 126,
+  "months": {
+   "2026-11": {
+    "hodCount": 16,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "QC",
+  "position": "Operator",
+  "totalNeed": 43,
+  "sortOrder": 127,
+  "months": {
+   "2026-11": {
+    "hodCount": 43,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "QC(Lab)",
+  "position": "Sr. Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 128,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 1,
+    "remarks": "DHINAKARAN T- SR Line leader",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 1,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "QC(Lab)",
+  "position": "Line Leader/Assistant",
+  "totalNeed": 1,
+  "sortOrder": 129,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 1,
+    "remarks": "SRINIVASAN V- Line leader",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 1,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "QC(Lab)",
+  "position": "Assistant Engineer",
+  "totalNeed": 5,
+  "sortOrder": 130,
+  "months": {
+   "2026-10": {
+    "hodCount": 5,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "QC(MES)",
+  "position": "Sr. Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 131,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "QC(MES)",
+  "position": "Line Leader",
+  "totalNeed": 1,
+  "sortOrder": 132,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "ME",
+  "position": "Manager",
+  "totalNeed": 1,
+  "sortOrder": 133,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "Sourcing",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "ME",
+  "position": "Sr. Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 134,
+  "months": {
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "ME",
+  "position": "Supervisor",
+  "totalNeed": 3,
+  "sortOrder": 135,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "ME",
+  "position": "Sr. Line Leader",
+  "totalNeed": 3,
+  "sortOrder": 136,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "Venkatesam M- Sr line leader appointed 1st wave",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "ME",
+  "position": "Line Leader/Assistant",
+  "totalNeed": 8,
+  "sortOrder": 137,
+  "months": {
+   "2026-11": {
+    "hodCount": 4,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 4,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "ME",
+  "position": "General",
+  "totalNeed": 2,
+  "sortOrder": 138,
+  "months": {
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "ME",
+  "position": "Assistant Engineer",
+  "totalNeed": 13,
+  "sortOrder": 139,
+  "months": {
+   "2026-11": {
+    "hodCount": 7,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 6,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "ME",
+  "position": "General",
+  "totalNeed": 2,
+  "sortOrder": 140,
+  "months": {
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "CE",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 141,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "Appointed - Vijaya Kumar s - 1st wave",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "CE",
+  "position": "Sr. Engineer",
+  "totalNeed": 1,
+  "sortOrder": 142,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "Appointed - Mani G - 1st wave",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "CE",
+  "position": "Engineer",
+  "totalNeed": 1,
+  "sortOrder": 143,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "CE",
+  "position": "Assistant Engineer",
+  "totalNeed": 1,
+  "sortOrder": 144,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RMW/FGW",
+  "position": "Sr. Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 145,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RMW(SR Line Leader/Lamination)",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 146,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RMW(SR Line Leader/Lamination)",
+  "position": "High Skilled Operator",
+  "totalNeed": 1,
+  "sortOrder": 147,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RMW(SR Line Leader/Lamination)",
+  "position": "Unskilled Operator",
+  "totalNeed": 1,
+  "sortOrder": 148,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RMW",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 149,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RMW",
+  "position": "Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 150,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RMW",
+  "position": "High Skilled Operator",
+  "totalNeed": 3,
+  "sortOrder": 151,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RMW",
+  "position": "Unskilled Operator",
+  "totalNeed": 7,
+  "sortOrder": 152,
+  "months": {
+   "2026-10": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RMW(Lamination)",
+  "position": "Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 153,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RMW(Lamination)",
+  "position": "Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 154,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RMW(Lamination)",
+  "position": "Unskilled Operator",
+  "totalNeed": 7,
+  "sortOrder": 155,
+  "months": {
+   "2026-12": {
+    "hodCount": 4,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 3,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "FGW",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 156,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "FGW",
+  "position": "Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 157,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "FGW",
+  "position": "High Skilled Operator",
+  "totalNeed": 3,
+  "sortOrder": 158,
+  "months": {
+   "2026-12": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-01": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "FGW",
+  "position": "Unskilled Operator",
+  "totalNeed": 5,
+  "sortOrder": 159,
+  "months": {
+   "2026-12": {
+    "hodCount": 3,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-01": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Sole Production",
+  "position": "Manager(Dai wei)",
+  "totalNeed": 1,
+  "sortOrder": 160,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Lean Production",
+  "position": "Manager(Bird)",
+  "totalNeed": 1,
+  "sortOrder": 161,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "GAP Admin",
+  "position": "Operation Director (Balan)",
+  "totalNeed": 1,
+  "sortOrder": 162,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Sole Production Planning",
+  "position": "Sr. Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 163,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Sole Production Planning",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 164,
+  "months": {
+   "2027-02": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Sole Production Planning",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 2,
+  "sortOrder": 165,
+  "months": {
+   "2027-02": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Sole Production Planning",
+  "position": "Executive Assistant",
+  "totalNeed": 4,
+  "sortOrder": 166,
+  "months": {
+   "2027-03": {
+    "hodCount": 4,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Sole Production Planning",
+  "position": "General Staff",
+  "totalNeed": 7,
+  "sortOrder": 167,
+  "months": {
+   "2027-03": {
+    "hodCount": 7,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Sole Production Planning",
+  "position": "Unskilled Operator",
+  "totalNeed": 11,
+  "sortOrder": 168,
+  "months": {
+   "2027-03": {
+    "hodCount": 7,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-04": {
+    "hodCount": 4,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Mold Repair",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 169,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Mold Repair",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 170,
+  "months": {
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Mold Repair",
+  "position": "Engineer",
+  "totalNeed": 1,
+  "sortOrder": 171,
+  "months": {
+   "2027-02": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Mold Repair",
+  "position": "Assistant Engineer",
+  "totalNeed": 3,
+  "sortOrder": 172,
+  "months": {
+   "2027-02": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2027-03": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "HR/Compliance",
+  "position": "Sr. Manager(Siva)",
+  "totalNeed": 1,
+  "sortOrder": 173,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "Appointed - joined on 16.10.2026 Saravanan R",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "HR/Compliance",
+  "position": "Supervisor",
+  "totalNeed": 2,
+  "sortOrder": 174,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "Appointed",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "HR/Compliance",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 2,
+  "sortOrder": 175,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "Sourcing - will be appointed on December 2026",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "HR/Compliance",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 176,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "Sourcing - will be appointed on December 2027",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "HR/Compliance",
+  "position": "Executive Assistant",
+  "totalNeed": 4,
+  "sortOrder": 177,
+  "months": {
+   "2026-10": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": "Sourcing - will be appointed on December 2028",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-11": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "HR/Compliance",
+  "position": "General Staff",
+  "totalNeed": 4,
+  "sortOrder": 178,
+  "months": {
+   "2026-10": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": "Appointed 1 Madesh",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-11": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Non Production Purchasing/GA",
+  "position": "Manager(Vaseem)",
+  "totalNeed": 1,
+  "sortOrder": 179,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Non Production Purchasing/GA",
+  "position": "Supervisor",
+  "totalNeed": 2,
+  "sortOrder": 180,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "not reqiuired",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Non Production Purchasing/GA",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 2,
+  "sortOrder": 181,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "Appointed - Ranjit Kumar abdul hanl",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-11": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Non Production Purchasing/GA",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 182,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "Appointed - Kahshira appoint",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Non Production Purchasing/GA",
+  "position": "Executive Assistant",
+  "totalNeed": 4,
+  "sortOrder": 183,
+  "months": {
+   "2026-10": {
+    "hodCount": 4,
+    "hrCount": 0,
+    "remarks": "asrar",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Non Production Purchasing/GA",
+  "position": "General Staff",
+  "totalNeed": 10,
+  "sortOrder": 184,
+  "months": {
+   "2026-10": {
+    "hodCount": 6,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-11": {
+    "hodCount": 4,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Non Production Purchasing/GA",
+  "position": "Unskilled Operator",
+  "totalNeed": 13,
+  "sortOrder": 185,
+  "months": {
+   "2026-10": {
+    "hodCount": 7,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-11": {
+    "hodCount": 6,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "TPM",
+  "position": "Sr. Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 186,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "TPM",
+  "position": "Supervisor",
+  "totalNeed": 2,
+  "sortOrder": 187,
+  "months": {
+   "2026-10": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "TPM",
+  "position": "Sr. Engineer",
+  "totalNeed": 3,
+  "sortOrder": 188,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   },
+   "2026-10": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": "1 Appointed Tamil thirumaran 1st wave passport issue.",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "TPM",
+  "position": "Assistant",
+  "totalNeed": 4,
+  "sortOrder": 189,
+  "months": {
+   "2026-10": {
+    "hodCount": 4,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "TPM",
+  "position": "Engineer",
+  "totalNeed": 1,
+  "sortOrder": 190,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "TPM",
+  "position": "Assistant Engineer",
+  "totalNeed": 15,
+  "sortOrder": 191,
+  "months": {
+   "2026-10": {
+    "hodCount": 15,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "TPM",
+  "position": "Staff",
+  "totalNeed": 1,
+  "sortOrder": 192,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Maintenance/electrical",
+  "position": "Sr. Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 193,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "1 Appointed - Vasudevan P DOJ- 2.12.2026",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Maintenance/electrical",
+  "position": "Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 194,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "1 Appointed - Dilip Kumar R DOJ-16.11.2026",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Maintenance/electrical",
+  "position": "Sr. Engineer",
+  "totalNeed": 2,
+  "sortOrder": 195,
+  "months": {
+   "2026-10": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": "2 Appointed 1. Premanathan L DOJ - 2.11.2026 2.Sathishkumar P- DOJ- 10.12.2026",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Maintenance/electrical",
+  "position": "Assistant",
+  "totalNeed": 4,
+  "sortOrder": 196,
+  "months": {
+   "2026-10": {
+    "hodCount": 4,
+    "hrCount": 0,
+    "remarks": "Sourcing",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Maintenance/electrical",
+  "position": "Engineer",
+  "totalNeed": 1,
+  "sortOrder": 197,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "1 Joined on - 16.10.2026- SETTU S",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Maintenance/electrical",
+  "position": "Assistant Engineer",
+  "totalNeed": 14,
+  "sortOrder": 198,
+  "months": {
+   "2026-10": {
+    "hodCount": 14,
+    "hrCount": 0,
+    "remarks": "SOURCING",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Admin",
+  "position": "Manager(Howard)",
+  "totalNeed": 1,
+  "sortOrder": 199,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Admin",
+  "position": "Sr. Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 200,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "To be confirmed by HOD",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Admin",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 201,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "1.MANO A - OFFER LETTER RELASED",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Admin",
+  "position": "Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 202,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "To be confirmed by HOD",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Admin",
+  "position": "General Staff",
+  "totalNeed": 1,
+  "sortOrder": 203,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "To be confirmed by HOD",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Construction",
+  "position": "Duty Manager(Willam)",
+  "totalNeed": 1,
+  "sortOrder": 204,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Construction",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 205,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "SOURCING",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Construction",
+  "position": "Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 206,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "SOURCING",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Customs",
+  "position": "Manager(Nick)",
+  "totalNeed": 1,
+  "sortOrder": 207,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Customs",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 208,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "SOURCING",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Customs",
+  "position": "Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 209,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "SOURCING",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Customs",
+  "position": "General Staff",
+  "totalNeed": 1,
+  "sortOrder": 210,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "SOURCING",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Finance",
+  "position": "Manager(Melvin)",
+  "totalNeed": 1,
+  "sortOrder": 211,
+  "months": {
+   "2026-09": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Finance",
+  "position": "Sr. Supervisor",
+  "totalNeed": 1,
+  "sortOrder": 212,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "To be confirmed by HOD",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Finance",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 213,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "To be confirmed by HOD",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Finance",
+  "position": "Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 214,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "1 Negotiation - Pending finance approval",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "Finance",
+  "position": "General Staff",
+  "totalNeed": 1,
+  "sortOrder": 215,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "To be confirmed by HOD",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RSC",
+  "position": "Manager",
+  "totalNeed": 1,
+  "sortOrder": 216,
+  "months": {
+   "2026-10": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": "1 Manager offer relased - DOJ 31.1.2026",
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RSC",
+  "position": "Supervisor",
+  "totalNeed": 2,
+  "sortOrder": 217,
+  "months": {
+   "2026-12": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RSC",
+  "position": "Sr. Executive Assistant",
+  "totalNeed": 1,
+  "sortOrder": 218,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RSC",
+  "position": "Executive Assistant",
+  "totalNeed": 2,
+  "sortOrder": 219,
+  "months": {
+   "2026-12": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RSC",
+  "position": "General Staff",
+  "totalNeed": 3,
+  "sortOrder": 220,
+  "months": {
+   "2026-12": {
+    "hodCount": 3,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RSC",
+  "position": "Assistant Engineer",
+  "totalNeed": 2,
+  "sortOrder": 221,
+  "months": {
+   "2026-12": {
+    "hodCount": 2,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ },
+ {
+  "dept": "RSC",
+  "position": "Unskilled Operator",
+  "totalNeed": 1,
+  "sortOrder": 222,
+  "months": {
+   "2026-12": {
+    "hodCount": 1,
+    "hrCount": 0,
+    "remarks": null,
+    "sourcing": 0,
+    "onboarding": 0,
+    "offerIssued": 0,
+    "joined": 0
+   }
+  }
+ }
+]

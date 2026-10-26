@@ -29,6 +29,7 @@ import {
   LOCAL_DEV_URL,
 } from './src/api/config';
 import { io } from 'socket.io-client';
+import HiringTracker from './src/HiringTracker';
 
 const STATUS_BAR_HEIGHT = Platform.OS === 'android' ? (StatusBar.currentHeight || 24) : 0;
 const AuthContext = createContext(null);
@@ -49,6 +50,7 @@ export default function App() {
   const [showConfig, setShowConfig] = useState(false);
   const [liveNotice, setLiveNotice] = useState(null);
   const [socketOnline, setOnline]   = useState(false);
+  const [hiringTick, setHiringTick] = useState(0);
 
   // Restore saved server URL from storage on startup
   useEffect(() => {
@@ -78,6 +80,8 @@ export default function App() {
         setLiveNotice(`📢 HR Directive: "${dir.title}"`);
         setTimeout(() => setLiveNotice(null), 6000);
       });
+
+      socket.on('hiring:update', () => setHiringTick(t => t + 1));
 
       socket.on('worklog:new', log => {
         setLiveNotice(`🏭 Work Report: ${log.department?.name || 'Department'} (${log.actualOutput || 0} units)`);
@@ -158,6 +162,7 @@ export default function App() {
               {currentTab === 'floor' && <DeptHeadFloorView user={user} token={token} />}
               {currentTab === 'onboarding' && <OnboardingView token={token} />}
               {currentTab === 'directives' && <DirectivesView user={user} token={token} />}
+              {currentTab === 'hiring' && <HiringTracker user={user} token={token} refreshSignal={hiringTick} />}
             </View>
 
             {/* Bottom Tab Navigation in flex flow with Android bottom inset */}
@@ -166,6 +171,7 @@ export default function App() {
                 <>
                   <TabItem label="Command" active={currentTab === 'dashboard'} onPress={() => setTab('dashboard')} icon="speedometer-outline" activeIcon="speedometer" />
                   <TabItem label="C26 Matrix" active={currentTab === 'matrix'} onPress={() => setTab('matrix')} icon="grid-outline" activeIcon="grid" />
+                  <TabItem label="Hiring" active={currentTab === 'hiring'} onPress={() => setTab('hiring')} icon="briefcase-outline" activeIcon="briefcase" />
                   <TabItem label="Onboard" active={currentTab === 'onboarding'} onPress={() => setTab('onboarding')} icon="people-outline" activeIcon="people" />
                   <TabItem label="Directives" active={currentTab === 'directives'} onPress={() => setTab('directives')} icon="megaphone-outline" activeIcon="megaphone" />
                 </>
@@ -173,7 +179,8 @@ export default function App() {
                 <>
                   <TabItem label="Floor Work" active={currentTab === 'floor'} onPress={() => setTab('floor')} icon="construct-outline" activeIcon="construct" />
                   <TabItem label="C26 Matrix" active={currentTab === 'matrix'} onPress={() => setTab('matrix')} icon="grid-outline" activeIcon="grid" />
-                  <TabItem label="Onboarding" active={currentTab === 'onboarding'} onPress={() => setTab('onboarding')} icon="people-outline" activeIcon="people" />
+                  <TabItem label="Hiring" active={currentTab === 'hiring'} onPress={() => setTab('hiring')} icon="briefcase-outline" activeIcon="briefcase" />
+                  <TabItem label="Onboard" active={currentTab === 'onboarding'} onPress={() => setTab('onboarding')} icon="people-outline" activeIcon="people" />
                   <TabItem label="Directives" active={currentTab === 'directives'} onPress={() => setTab('directives')} icon="megaphone-outline" activeIcon="megaphone" />
                 </>
               )}

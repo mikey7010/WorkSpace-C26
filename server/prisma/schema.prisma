@@ -194,3 +194,42 @@ model ActivityLog {
 
   user User @relation(fields: [userId], references: [id])
 }
+
+// ---------------- HIRING TRACKER (Work + Summary) ----------------
+// One row per Dept + Position from the SMART MASTER sheet.
+model HiringPosition {
+  id         Int           @id @default(autoincrement())
+  dept       String
+  position   String
+  totalNeed  Int           @default(0)
+  sortOrder  Int           @default(0)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  months     HiringMonth[]
+
+  @@unique([dept, position, sortOrder])
+}
+
+// One entry per position per month (e.g. "2026-09").
+// HOD fills hodCount (how many needed); HR fills hrCount (how many selected)
+// and splits the selected people across the four stages.
+model HiringMonth {
+  id           Int            @id @default(autoincrement())
+  positionId   Int
+  month        String         // YYYY-MM
+  hodCount     Int            @default(0)
+  hrCount      Int            @default(0)
+  sourcing     Int            @default(0)
+  onboarding   Int            @default(0)
+  offerIssued  Int            @default(0)
+  joined       Int            @default(0)
+  joiningDate  String?        // free text / date, e.g. "16.11.2026"
+  remarks      String?
+  updatedBy    String?
+  updatedAt    DateTime       @updatedAt
+  createdAt    DateTime       @default(now())
+
+  position HiringPosition @relation(fields: [positionId], references: [id], onDelete: Cascade)
+
+  @@unique([positionId, month])
+}

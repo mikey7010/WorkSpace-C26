@@ -30,6 +30,7 @@ const worklogRoutes      = require('./routes/worklogs');
 const recruitmentRoutes  = require('./routes/recruitment');
 const directiveRoutes    = require('./routes/directives');
 const manpowerPlanRoutes = require('./routes/manpowerPlan');
+const hiringRoutes       = require('./routes/hiring');
 
 const app = express();
 const server = http.createServer(app);
@@ -102,6 +103,7 @@ app.use('/api/worklogs',      worklogRoutes);
 app.use('/api/recruitment',   recruitmentRoutes);
 app.use('/api/directives',    directiveRoutes);
 app.use('/api/manpower-plan', manpowerPlanRoutes);
+app.use('/api/hiring',        hiringRoutes);
 
 // Reliable Health Check Endpoint for Render and monitoring
 app.get('/api/health', async (_req, res) => {
